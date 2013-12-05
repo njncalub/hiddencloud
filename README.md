@@ -1,4 +1,4 @@
-hiddencloud
+Hidden Cloud Academy
 ===========
 
-The Hidden Cloud Academy for Overlooked Skills
+A game-based skill training portal using LimeJS and NimbusBase
