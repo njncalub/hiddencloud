@@ -9,9 +9,10 @@ goog.require('hiddencloud.Models');
 
 hiddencloud.start = function() {
   // set screen resolution:
-  var game_width = 640; //default=1024
-  var game_height = 480; //default=768
+  var game_width = 320; //default=640
+  var game_height = 240; //default=480
 
+  //var director = new lime.Director(document.body, game_width, game_height);
   var director = new lime.Director(document.body, game_width, game_height);
       director.makeMobileWebAppCapable();
       director.setDisplayFPS(false);
@@ -24,7 +25,7 @@ hiddencloud.start = function() {
   var startButton = new lime.GlossyButton().setSize(70, 20).setPosition(40, 10).setText('Start').setColor('#B0171F');
 
   goog.events.listen(startButton, ['mousedown', 'touchstart'], function(e) {
-    var player = new hiddencloud.Models.Player();
+    var player = new hiddencloud.Models.Player(); // create player
   });
 
   startLayer.appendChild(startBackground);
