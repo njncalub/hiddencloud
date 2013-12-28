@@ -5,8 +5,7 @@ goog.provide('hiddencloud.Characters');
 hiddencloud.Characters.Character = function() {
   // Characters store the data for each character of the game
   console.log('entered models: created character object');
+  
   this.character_name = "";
-
-
 };
 

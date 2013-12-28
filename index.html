@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The Hidden Cloud Academy for the Overlooked Skills">
+  <meta name="author" content="Nap Joseph N. Calub">
+  <link rel="shortcut icon" type="image/x-icon" href="res/ico/favicon.ico">
+  <title>The Hidden Cloud Academy</title>
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="res/css/bootstrap.min.css">
+  <link rel="stylesheet" href="res/css/font-awesome.min.css">
+  <link rel="stylesheet" href="res/css/3dcloud.css">
+  <link rel="stylesheet" href="res/css/loadingbar.css">
+  <!-- <link rel="stylesheet" href="res/css/main.css"> -->
+  <link rel="stylesheet" href="res/css/index.css">
+</head>
+<body>
+
+  <div class="login-wrapper">
+    <div id="loadingbar-frame"></div>
+    <div id="viewport">
+      <div id="world" style="position: absolute; z-index: 1">
+      </div>
+    </div>
+
+    <div class="container" style="position: relative; z-index: 9999">
+      <div class="row-fluid text-center">
+        <div class="col-md-12">
+          <img class="img-responsive" src="res/img/hca-logo-4.png" style="z-index: 9999"/>
+        </div>
+      </div>
+      <div class="row-fluid text-center">
+        <div class="col-md-12">
+          <div class="login-buttons hidden-xs">
+            <a class="btn btn-default btn-large ajax-call" onclick="Nimbus.Auth.authorize('Dropbox')"><i class="fa fa-dropbox fa-login"></i> Login with Dropbox</a> or
+            <a class="btn btn-default btn-large ajax-call" onclick="Nimbus.Auth.authorize('GDrive')"><i class="fa fa-google-plus-square fa-login"></i> Login with Google</a>
+          </div>
+          <div class="login-buttons visible-xs">
+            <a class="btn btn-default btn-large ajax-call" onclick="Nimbus.Auth.authorize('Dropbox')"><i class="fa fa-dropbox fa-login"></i> Login with Dropbox</a>
+            <br />
+            or
+            <br />
+            <a class="btn btn-default btn-large ajax-call" onclick="Nimbus.Auth.authorize('GDrive')"><i class="fa fa-google-plus-square fa-login"></i> Login with Google</a>
+          </div>
+        </div>
+        <div class="col-lg-12">
+          
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /login-wrapper -->
+
+  <footer>
+    <div class="container">
+      <div class="footer-box">
+        Copyright &copy; 2014 POWERNAP, INC. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script type="text/javascript" src="res/js/jquery.js"></script>
+  <script type="text/javascript" src="res/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="res/js/cloudscript.js"></script>
+  <script type="text/javascript" src="res/js/nimbus.min.js"></script>
+  <script type="text/javascript" src="res/js/multi.js"></script>
+  <script type="text/javascript" src="res/js/hiddennimbus.js"></script>
+  <script type="text/javascript" src="res/js/jquery.loadingbar.min.js"></script>
+  <script type="text/javascript" src="res/js/addloadingbar.js"></script>
+
+</body>
+</html>
