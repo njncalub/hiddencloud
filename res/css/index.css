@@ -73,3 +73,71 @@ footer .container {
   border-width: 30px;
   margin-left: -30px;
 }
+
+/* generated from: http://codepo8.github.io/css-fork-on-github-ribbon/ */
+
+#forkongithub {
+  z-index: 10000;
+  position: absolute;
+}
+
+#forkongithub a {
+  background: #8B0000;
+  color: #fff;
+  text-decoration: none;
+  font-family: arial, sans-serif;
+  text-align: center;
+  font-weight: bold;
+  padding: 5px 40px;
+  font-size: 1rem;
+  line-height: 2rem;
+  position: inherit;
+  transition: 0.5s;
+  width: 100%;
+}
+
+#forkongithub a:hover {
+  background: #000;
+  color: #fff;
+}
+
+#forkongithub a::before,
+#forkongithub a::after {
+  content: "";
+  width: 100%;
+  display: block;
+  position: absolute;
+  top: 1px;
+  left: 0;
+  height: 1px;
+  background: #fff;
+}
+
+#forkongithub a::after {
+  bottom: 1px;
+  top: auto;
+}
+
+@media screen and (min-width: 800px) {
+  #forkongithub {
+    position: fixed;
+    display: block;
+    top: 0;
+    right: 0;
+    width: 200px;
+    overflow: hidden;
+    height: 200px;
+    z-index: 10000;
+  }
+  #forkongithub a {
+    width: 200px;
+    position: fixed;
+    top: 30px;
+    right: -55px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    box-shadow: 4px 4px 10px rgba(0,0,0,0.2);
+  }
+}
+
+/* /generated from: http://codepo8.github.io/css-fork-on-github-ribbon/ */
