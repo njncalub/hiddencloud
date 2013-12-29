@@ -78,6 +78,7 @@ footer .container {
 #forkongithub {
   z-index: 10000;
   position: absolute;
+  width: 100%;
 }
 #forkongithub a {
   background: #ebebeb;
