@@ -75,15 +75,13 @@ footer .container {
 }
 
 /* generated from: http://codepo8.github.io/css-fork-on-github-ribbon/ */
-
 #forkongithub {
   z-index: 10000;
   position: absolute;
 }
-
 #forkongithub a {
-  background: #8B0000;
-  color: #fff;
+  background: #ebebeb;
+  color: #333;
   text-decoration: none;
   font-family: arial, sans-serif;
   text-align: center;
@@ -95,12 +93,10 @@ footer .container {
   transition: 0.5s;
   width: 100%;
 }
-
 #forkongithub a:hover {
-  background: #000;
+  background: #8B0000;
   color: #fff;
 }
-
 #forkongithub a::before,
 #forkongithub a::after {
   content: "";
@@ -112,12 +108,10 @@ footer .container {
   height: 1px;
   background: #fff;
 }
-
 #forkongithub a::after {
   bottom: 1px;
   top: auto;
 }
-
 @media screen and (min-width: 800px) {
   #forkongithub {
     position: fixed;
@@ -139,5 +133,4 @@ footer .container {
     box-shadow: 4px 4px 10px rgba(0,0,0,0.2);
   }
 }
-
 /* /generated from: http://codepo8.github.io/css-fork-on-github-ribbon/ */
