@@ -45,8 +45,8 @@ a.btn {
   /*color: #8B0000;*/
 }
 
-/*
 footer {
+  /*border-top: 1px solid #eee;*/
   background-color: #f5f5f5;
   padding-top: 20px;
   padding-bottom: 20px;
@@ -76,7 +76,6 @@ footer .container {
   border-width: 30px;
   margin-left: -30px;
 }
-*/
 
 /* generated from: http://codepo8.github.io/css-fork-on-github-ribbon/ */
 #forkongithub {

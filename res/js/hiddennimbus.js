@@ -17,7 +17,6 @@
   Player = Nimbus.Model.setup("Player", ["last_name", "first_name", "middle_name", "email_address", "gender", "cluster", "department", "birth_date"]);
   Book = Nimbus.Model.setup("Book", ["book_title", "book_text", "book_url", "date_created"]);
   Score = Nimbus.Model.setup("Score", ["score", "player", "date_created"]);
-  Log = Nimbus.Model.setup("Log", ["date_created"]);
 
   window.log_out = function() {
     console.log('logged out');
@@ -31,6 +30,5 @@
   exports.Player = Player;
   exports.Book = Book;
   exports.Score = Score;
-  exports.Log = Log;
 
 }).call(this);
