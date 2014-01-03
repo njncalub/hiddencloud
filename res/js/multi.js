@@ -1,6 +1,5 @@
 (function() {
   var sync_object;
-
   sync_object = {
     "Dropbox": {
       "key": "sbgjel5lku38766",
@@ -8,12 +7,14 @@
       "app_name": "The Hidden Cloud Academy"
     },
     "GDrive": {
-      "key": "424243246254-n6b2v8j4j09723ktif41ln247n75pnts.apps.googleusercontent.com",
+      "key": "842525491470.apps.googleusercontent.com",
       "scope": "https://www.googleapis.com/auth/drive",
-      "app_name": "diary_app"
+      "app_name": "The Hidden Cloud Academy"
     },
   };
-
   Nimbus.Auth.setup(sync_object);
+
+  // var sync_string = "eyJHRHJpdmUiOnsia2V5IjoiODQyNTI1NDkxNDcwLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic2NvcGUiOiJodHRwczovL3d3dy5nb29nbGVhcGlzLmNvbS9hdXRoL2RyaXZlIiwiYXBwX25hbWUiOiJUaGUgSGlkZGVuIENsb3VkIEFjYWRlbXkifSwiRHJvcGJveCI6eyJrZXkiOiJzYmdqZWw1bGt1Mzg3NjYiLCJzZWNyZXQiOiJ0dTJxeW45NHUwMWs3cDAiLCJhcHBfbmFtZSI6IlRoZSBIaWRkZW4gQ2xvdWQgQWNhZGVteSJ9fQ==";
+  // Nimbus.Auth.setup(sync_string);
 
 }).call(this);
