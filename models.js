@@ -39,10 +39,10 @@ hiddencloud.Models.Score = function() {
   console.log('created score object: ' + this.score);
 };
 
-hiddencloud.Models.LogBook = function() {
-  // LogBooks store the progress of each player
+hiddencloud.Models.Log = function() {
+  // Logs store the progress of each player
 
   this.date_created = Date();
 
-  console.log('created logbook object: ' + this.date_created);
+  console.log('created log object: ' + this.date_created);
 }
