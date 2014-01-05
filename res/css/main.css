@@ -90,9 +90,24 @@ header {
   }
 }
 /* /navbar css generated from http://smarchal.com/twbscolor/?bd=e74c3c&bh=c0392b&cd=ecf0f1&ch=ffbbbc */
+.navbar {
+border-radius: 0;
+}
 
 .inlinebtn {
   display: inline;
+}
+
+/*.content {
+  background-color: #000;
+}
+
+.content-container {
+  background-color: #333;
+}*/
+
+#wrap {
+  background: url('../img/nami-pattern.png');
 }
 
 #gamecanvas {
@@ -109,8 +124,9 @@ header {
 footer {
 /*  background-color: #18191b;
   color: #4d5356;*/
-  border-top: 1px solid #eee;
-  background-color: #f5f5f5;
+  /*border-top: 1px solid #eee;*/
+  background: rgba(0,0,0,0.3);
+  color: #e1e1e1;
   padding-top: 20px;
   padding-bottom: 20px;
 }
@@ -119,4 +135,20 @@ footer .container {
   text-align: center;
   position: relative;
   /*height: 50px;*/
+}
+
+.container-card {
+  background: rgba(0,0,0,0.3);
+  padding: 10px;
+}
+
+.navbar-brand {
+  max-height: 40px;
+  overflow: visible;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.navbar-brand img {
+  padding-right: 5px;
 }
