@@ -1,4 +1,4 @@
-// trial
+// trial2
 (function() {
   var Player, Book, Score, LogBook;
   var exports;
