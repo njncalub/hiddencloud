@@ -264,6 +264,7 @@ hiddencloud.Models.Score = function() {
 hiddencloud.Models.LogBook = function() {
   // LogBook stores the log of each player
 
+  this.type = "";
   this.date_created = Date();
 
   console.log('created log object: ' + this.date_created);

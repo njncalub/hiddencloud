@@ -3,17 +3,31 @@
   var Player, Book, Score, LogBook;
   var exports;
 
+  var hca = {};
+  hca.create_log = function(type) {
+    LogBook.create({
+      "type":type,
+      "date_created":Date(),
+    });
+  }
+
   $(function() {
     return Nimbus.Auth.set_app_ready(function() {
-      console.log("app ready called");
-      // if (Nimbus.Auth.authorized()) {
-      //   $("#login-button").addClass("hidden");
-      //   $("#logout-button").removeClass("hidden");
-      //   $("#gamecanvas").removeClass("hidden");
-      //   return window.auto_sync();
-      // }
-
-
+      console.log("app ready!");
+      var pathArray = window.location.pathname.split( '/' );
+      if (pathArray[pathArray.length-1] == "index.html") {
+        if(Nimbus.Auth.authorized()) {
+          window.location = "main.html";
+          // Create log
+          hca.create_log("login");
+        }
+      }
+      else {
+        if (!Nimbus.Auth.authorized()) {
+          console.log("not yet authorized!");
+          window.location = "index.html";
+        }
+      }
     });
   });
 
@@ -21,16 +35,22 @@
   Player = Nimbus.Model.setup("Player", ["last_name", "first_name", "middle_name", "email_address", "gender", "cluster", "department", "birth_date"]);
   Book = Nimbus.Model.setup("Book", ["book_title", "book_text", "book_url", "date_created"]);
   Score = Nimbus.Model.setup("Score", ["score", "player", "date_created"]);
-  LogBook = Nimbus.Model.setup("LogBook", ["date_created"]);
+  LogBook = Nimbus.Model.setup("LogBook", ["type", "date_created"]);
+
+  window.edit_profile = function() {
+    console.log("edit_profile() called.");
+    $('#myModal').modal({
+      keyboard: false,
+    }
+    );
+  };
 
   window.log_out = function() {
+    console.log("log_out() called.");
     Nimbus.Auth.logout();
     window.location = "index.html";
-    console.log('logged out');
-    window.alert('logged out!');
-    // $("#login-button").removeClass("hidden");
-    // $("#logout-button").addClass("hidden");
-    // $("#gamecanvas").addClass("hidden");
+    console.log('user is logged out');
+    window.alert('You are logged out!');
   };
 
   exports = this;
