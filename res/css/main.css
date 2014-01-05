@@ -131,6 +131,19 @@ footer {
   padding-bottom: 20px;
 }
 
+footer a {
+  color: #e1e1e1;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+footer a:hover {
+  color: #ffffff;
+  text-decoration: none;
+}
+
 footer .container {
   text-align: center;
   position: relative;

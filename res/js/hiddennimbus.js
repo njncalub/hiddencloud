@@ -1,3 +1,4 @@
+// trial
 (function() {
   var Player, Book, Score, LogBook;
   var exports;
@@ -11,6 +12,8 @@
       //   $("#gamecanvas").removeClass("hidden");
       //   return window.auto_sync();
       // }
+
+
     });
   });
 
@@ -21,8 +24,10 @@
   LogBook = Nimbus.Model.setup("LogBook", ["date_created"]);
 
   window.log_out = function() {
-    console.log('logged out');
     Nimbus.Auth.logout();
+    window.location = "index.html";
+    console.log('logged out');
+    window.alert('logged out!');
     // $("#login-button").removeClass("hidden");
     // $("#logout-button").addClass("hidden");
     // $("#gamecanvas").addClass("hidden");
