@@ -5,12 +5,12 @@
   $(function() {
     return Nimbus.Auth.set_app_ready(function() {
       console.log("app ready called");
-      if (Nimbus.Auth.authorized()) {
-        $("#login-button").addClass("hidden");
-        $("#logout-button").removeClass("hidden");
-        $("#gamecanvas").removeClass("hidden");
-        return window.auto_sync();
-      }
+      // if (Nimbus.Auth.authorized()) {
+      //   $("#login-button").addClass("hidden");
+      //   $("#logout-button").removeClass("hidden");
+      //   $("#gamecanvas").removeClass("hidden");
+      //   return window.auto_sync();
+      // }
     });
   });
 
@@ -23,9 +23,9 @@
   window.log_out = function() {
     console.log('logged out');
     Nimbus.Auth.logout();
-    $("#login-button").removeClass("hidden");
-    $("#logout-button").addClass("hidden");
-    $("#gamecanvas").addClass("hidden");
+    // $("#login-button").removeClass("hidden");
+    // $("#logout-button").addClass("hidden");
+    // $("#gamecanvas").addClass("hidden");
   };
 
   exports = this;
