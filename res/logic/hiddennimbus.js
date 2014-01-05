@@ -1,3 +1,4 @@
+// trial2
 (function() {
   var Player, Book, Score, LogBook;
   var exports;
@@ -5,12 +6,14 @@
   $(function() {
     return Nimbus.Auth.set_app_ready(function() {
       console.log("app ready called");
-      if (Nimbus.Auth.authorized()) {
-        // $("#login-button").addClass("hidden");
-        // $("#logout-button").removeClass("hidden");
-        // $("#gamecanvas").removeClass("hidden");
-        // return window.auto_sync();
-      }
+      // if (Nimbus.Auth.authorized()) {
+      //   $("#login-button").addClass("hidden");
+      //   $("#logout-button").removeClass("hidden");
+      //   $("#gamecanvas").removeClass("hidden");
+      //   return window.auto_sync();
+      // }
+
+
     });
   });
 
@@ -21,8 +24,10 @@
   LogBook = Nimbus.Model.setup("LogBook", ["date_created"]);
 
   window.log_out = function() {
-    console.log('logged out');
     Nimbus.Auth.logout();
+    window.location = "index.html";
+    console.log('logged out');
+    window.alert('logged out!');
     // $("#login-button").removeClass("hidden");
     // $("#logout-button").addClass("hidden");
     // $("#gamecanvas").addClass("hidden");
