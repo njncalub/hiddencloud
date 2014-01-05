@@ -1,6 +1,6 @@
 $(".ajax-call").loadingbar({
   target: "#loadingbar-frame",
-  replaceURL: false,
+  replaceURL: true,
   direction: "right",
 
   /* Default Ajax Parameters.  */
