@@ -3,8 +3,7 @@
   var Player, Book, Score, LogBook;
   var exports;
 
-  var hca = {};
-  hca.create_log = function(type) {
+  create_log = function(type) {
     LogBook.create({
       "type":type,
       "date_created":Date(),
@@ -17,9 +16,10 @@
       var pathArray = window.location.pathname.split( '/' );
       if (pathArray[pathArray.length-1] == "index.html") {
         if(Nimbus.Auth.authorized()) {
-          window.location = "main.html";
           // Create log
-          hca.create_log("login");
+          create_log("login successful");
+          console.log("creating log");
+          window.location = "main.html";
         }
       }
       else {
