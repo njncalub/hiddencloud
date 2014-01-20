@@ -13,6 +13,7 @@
   $(function() {
     return Nimbus.Auth.set_app_ready(function() {
       console.log("app ready!");
+      Player.sync_all( function(){ console.log("Everything is synced") } );
       var pathArray = window.location.pathname.split( '/' );
       if (pathArray[pathArray.length-1] == "index.html") {
         if(Nimbus.Auth.authorized()) {
@@ -41,8 +42,50 @@
     console.log("edit_profile() called.");
     $('#myModal').modal({
       keyboard: false,
+    });
+
+    // check if has existing profile:
+    if (Player.count() > 0) {
+      player_profile = Player.last();
+
+      // replace placeholder text
+      $("#last_name").val(player_profile.last_name);
+      $("#first_name").val(player_profile.first_name);
+      $("#middle_name").val(player_profile.middle_name);
+      $("#email_address").val(player_profile.email_address);
+      $("#gender").val(player_profile.gender);
+      $("#cluster").val(player_profile.cluster);
+      $("#department").val(player_profile.department);
+
     }
-    );
+    // load values first:
+
+  };
+
+  function change_cluster_dropdown() {
+    
+  };
+
+  window.save_profile = function() {
+    console.log("save_profile() called.");
+
+    if (Player.count() > 0) {
+      player_profile = Player.last();
+    }
+    else {
+      player_profile = Player.create();
+    }
+
+    player_profile.last_name = $("#last_name").val();
+    player_profile.first_name = $("#first_name").val();
+    player_profile.middle_name = $("#middle_name").val();
+    player_profile.email_address = $("#email_address").val();
+    player_profile.gender = $("#gender").val();
+    player_profile.cluster = $("#cluster").val();
+    player_profile.department = $("#department").val();
+
+    player_profile.save();
+
   };
 
   window.log_out = function() {
