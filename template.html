@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The Hidden Cloud Academy for the Overlooked Skills">
+  <meta name="author" content="Nap Joseph N. Calub">
+  <link rel="shortcut icon" type="image/x-icon" href="res/ico/favicon.ico">
+  <title>The Hidden Cloud Academy</title>
+
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="res/css/bootstrap.min.css">
+  <link rel="stylesheet" href="res/css/font-awesome.min.css">
+  <link rel="stylesheet" href="res/css/main.css">
+  <link rel="stylesheet" href="res/css/sticky.css">
+</head>
+<body>
+  <script type="text/javascript" src="res/js/jquery.js"></script>
+
+  <div id="wrap">
+    <header class="navbar navbar-inverse" role="navigation">
+      <div class="container">
+
+        <div class="navbar-header">
+          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="#" class="navbar-brand"><img src="res/img/white-cloud.png" />The Hidden Cloud Academy</a>
+        </div>
+
+        <div class="collapse navbar-collapse" role="navigation">
+          <ul class="nav navbar-nav navbar-left">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#" onclick="window.edit_profile()">Edit Profile</a></li>
+                <li><a href="#" onclick="window.manage_books()">Manage Books</a></li>
+                <li class="divider"></li>
+                <li><a href="#" onclick="window.log_out()">Logout</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </header>
+
+    <div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">Edit Profile</h4>
+          </div>
+          <div class="modal-body">
+
+          <form role="form">
+            <div class="form-group">
+              <label for="last_name">Last Name</label>
+              <input type="text" class="form-control" id="last_name" placeholder="">
+            </div>
+            <div class="form-group">
+              <label for="first_name">First Name</label>
+              <input type="text" class="form-control" id="first_name" placeholder="">
+            </div>
+            <div class="form-group">
+              <label for="middle_name">Middle Name</label>
+              <input type="text" class="form-control" id="middle_name" placeholder="">
+            </div>
+            <div class="form-group">
+              <label for="department">Birth Date</label>
+              <input type="date" class="form-control" id="birth_date" placeholder="">
+              <span class="add-on"><i class="icon-th"></i></span>
+            </div>
+            <div class="form-group">
+              <label for="email_address">Email Address</label>
+              <input type="email" class="form-control" id="email_address" placeholder="">
+            </div>
+            <div class="form-group">
+              <label for="gender">Gender</label>
+              <select id="gender" class="form-control">
+                <option>Male</option>
+                <option>Female</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="cluster">Cluster</label>
+              <select id="cluster" class="form-control">
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="department">Department</label>
+              <select id="department" class="form-control">
+              </select>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" onclick="window.save_profile()">Save changes</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+  </div> <!-- /#wrap -->
+
+  <footer>
+    <div class="container">
+      <p>Copyright &copy; 2013&ndash;2014 <a href="//njncalub.github.io">POWERNAP, INC.</a> All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script type="text/javascript" src="res/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="res/js/nimbus.min.js"></script>
+  <!--<script type="text/javascript" src="res/js/bootstrap-datepicker.js"></script>-->
+  <script type="text/javascript" src="res/logic/hiddennimbus.js"></script>
+  <script type="text/javascript" src="res/logic/multi.js"></script>
+  <script type="text/javascript" src="../closure/closure/goog/base.js"></script>
+  <script type="text/javascript" src="hiddencloud.js"></script>
+
+</body>
+</html>
