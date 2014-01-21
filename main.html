@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="res/css/font-awesome.min.css">
   <link rel="stylesheet" href="res/css/main.css">
   <link rel="stylesheet" href="res/css/sticky.css">
+  <link rel="stylesheet" href="res/css/datepicker.css">
 </head>
 <body onload="hiddencloud.start()">
   <script type="text/javascript" src="res/js/jquery.js"></script>
@@ -43,6 +44,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="#" onclick="window.edit_profile()">Edit Profile</a></li>
+                <li><a href="#" onclick="window.manage_books()">Manage Books</a></li>
                 <li class="divider"></li>
                 <li><a href="#" onclick="window.log_out()">Logout</a></li>
               </ul>
@@ -53,7 +55,7 @@
       </div>
     </header>
 
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -77,6 +79,11 @@
               <input type="text" class="form-control" id="middle_name" placeholder="">
             </div>
             <div class="form-group">
+              <label for="department">Birth Date (MM/DD/YYYY)</label>
+              <input type="text" class="form-control" id="birth_date" placeholder="">
+              <span class="add-on"><i class="icon-th"></i></span>
+            </div>
+            <div class="form-group">
               <label for="email_address">Email Address</label>
               <input type="email" class="form-control" id="email_address" placeholder="">
             </div>
@@ -90,15 +97,11 @@
             <div class="form-group">
               <label for="cluster">Cluster</label>
               <select id="cluster" class="form-control">
-                <option>Option 1</option>
-                <option>Option 2</option>
               </select>
             </div>
             <div class="form-group">
               <label for="department">Department</label>
               <select id="department" class="form-control">
-                <option>Option 1</option>
-                <option>Option 2</option>
               </select>
             </div>
 
@@ -106,6 +109,25 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             <button type="button" class="btn btn-primary" onclick="window.save_profile()">Save changes</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div class="modal fade" id="manageBooksModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">Manage Books</h4>
+          </div>
+          <div class="modal-body">
+            <!-- This is a trial -->
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <!-- <button type="button" class="btn btn-primary" onclick="window.save_profile()">Save changes</button> -->
           </div>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
@@ -127,8 +149,10 @@
 
   <script type="text/javascript" src="res/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="res/js/nimbus.min.js"></script>
+  <script type="text/javascript" src="res/js/bootstrap-datepicker.js"></script>
   <script type="text/javascript" src="res/logic/hiddennimbus.js"></script>
   <script type="text/javascript" src="res/logic/multi.js"></script>
+  <script type="text/javascript" src="res/logic/main.js"></script>
   <script type="text/javascript" src="../closure/closure/goog/base.js"></script>
   <script type="text/javascript" src="hiddencloud.js"></script>
 
