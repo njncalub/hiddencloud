@@ -17,7 +17,12 @@
   $(function() {
     return Nimbus.Auth.set_app_ready(function() {
       console.log("app ready!");
-      Player.sync_all( function(){ console.log("Everything is synced") } );
+
+      // Sync data:
+      Player.sync_all( function(){ console.log("Player is synced") } );
+      Book.sync_all( function(){ console.log("Book is synced"); refresh_books(); } );
+
+      // Check path:
       var pathArray = window.location.pathname.split( '/' );
       if (pathArray[pathArray.length-1] == "index.html") {
         if(Nimbus.Auth.authorized()) {
@@ -38,7 +43,7 @@
 
   // Create NimbusBase Models:
   Player = Nimbus.Model.setup("Player", ["last_name", "first_name", "middle_name", "email_address", "gender", "cluster", "department", "birth_date"]);
-  Book = Nimbus.Model.setup("Book", ["book_title", "book_text", "book_url", "date_created"]);
+  Book = Nimbus.Model.setup("Book", ["book_title", "book_content", "book_url", "date_created"]);
   Score = Nimbus.Model.setup("Score", ["score", "player", "date_created"]);
   LogBook = Nimbus.Model.setup("LogBook", ["type", "date_created"]);
 
@@ -323,11 +328,103 @@
     }
   };
 
+//!! MANAGE BOOKS FUNCTIONS:
+  var selected_book;
+
   window.manage_books = function() {
     console.log("manage_books() called.");
-    $('#manageBooksModal').modal({
-      keyboard: false,
-    });
+    window.location = "books.html";
+  }
+
+  window.refresh_books = function() {
+    console.log("refresh_books() called.");
+    Book.sync_all();
+    $('#all-books-ul').empty();
+    all_books = Book.all();
+    for (var i=0; i<all_books.length; i++) {
+      $("#all-books-ul").append(
+        '<a href="#" class="list-group-item book-li" id="' + all_books[i].id +  '">' +
+        all_books[i].book_title +
+        '</a>'
+      );
+    }
+  }
+
+  window.load_book = function(book_id) {
+    console.log("load_book() called.");
+    selected_book = Book.find(book_id);
+
+    $("#book_title").val(selected_book.book_title);
+    $("#book_content").val(selected_book.book_content);
+  }
+
+  function import_text_file(file)
+  {
+    var rawFile = new XMLHttpRequest();
+    rawFile.open("GET", file.link, true);
+    rawFile.onreadystatechange = function ()
+    {
+      if(rawFile.readyState === 4)
+      {
+        if(rawFile.status === 200 || rawFile.status == 0)
+        {
+          var allText = rawFile.responseText;
+          // console.log(allText);
+
+          $("#book_title").val(file.name);
+          $("#book_content").val(allText);
+
+          var book_title = $("#book_title").val();
+          var book_content = $("#book_content").val();
+
+          selected_book = Book.create({"book_title":book_title, "book_content":book_content, "date_created":Date()});
+          window.refresh_books();
+        }
+      }
+    }
+    rawFile.send(null);
+  }
+
+
+  window.save_book = function() {
+    console.log("save_book() called.");
+
+    // Add dismissable error if field is blank:
+    if ( !$("#book_title").val() || !$("#book_content").val() ) {
+      $("#alert-here").append(
+        '<div class="alert alert-warning alert-dismissable">' +
+          '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' +
+          '<strong>Warning!</strong> Please fill in all the fields.' +
+        '</div>'
+      );
+    }
+
+    var book_title = $("#book_title").val();
+    var book_content = $("#book_content").val();
+
+    selected_book = Book.create({"book_title":book_title, "book_content":book_content, "date_created":Date()});
+    window.refresh_books();
+
+    selected_book = {};
+    $("#book_title").val("");
+    $("#book_content").val("");
+
+    // if has currently selected book:
+
+    // if (selected_book != {}) {
+    //   selected_book.book_title = book_title;
+    //   selected_book.book_content = book_content;
+    //   selected_book.save();
+    // }
+    // else {
+    //   selected_book = Book.create({"book_title":book_title, "book_content":book_content, "date_created":Date()});
+    // }
+
+  }
+
+  window.delete_book = function(book_id) {
+    console.log("delete_book() called.");
+
   }
 
   function change_cluster_dropdown() {
@@ -391,11 +488,27 @@
     window.alert('You are logged out!');
   };
 
+  var db_options = {
+      success: function(files) {
+        // alert("Here's the file link: " + files[0].link)
+        // console.log(files[0]);
+        import_text_file(files[0]);
+      },
+      cancel: function() {
+      },
+
+      linkType: "direct",
+      multiselect: false,
+      extensions: ['.pdf', '.doc', '.docx', '.txt'],
+    };
+
   exports = this;
   exports.Player = Player;
   exports.Book = Book;
   exports.Score = Score;
   exports.LogBook = LogBook;
   exports.cluster_choices = cluster_choices;
+  exports.selected_book = selected_book;
+  exports.db_options = db_options;
 
 }).call(this);
