@@ -1,22 +1,23 @@
 (function() {
 
-  function initialise() {
-    window.refresh_books();
-    console.log("went here!1");
-    $(".book-li").on( "click", function(event) {
-      // console.log("went here!2");
-      console.log(event.target.id);
-      window.load_book(event.target.id);
-    });
-  };
-
   // Redirect to main page if already authorized:
   $(document).ready(function() {
-    initialise();
-    // var button = Dropbox.createChooseButton(options);
-    // document.getElementById("container").appendChild(button);
+    window.refresh_books();
 
-    
+    // $(".book-li").on( "click", function(event) {
+    //   console.log("Clicked book: " + event.target.id);
+    //   window.load_book(event.target.id);
+    // });
+
+    $( "#all-books-ul" ).delegate( ".book-li", "click", function() {
+      console.log("Clicked book: " + this.id);
+      window.load_book(event.target.id);
+    });
+
+    $(".btn-delete-book").on( "click", function(event) {
+      // book_id = selected_book.id;
+      window.delete_book();
+    });
 
     // file = {
     //   // Name of the file.
