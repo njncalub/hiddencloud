@@ -417,7 +417,10 @@
     // get selected book
     if (sb) {
       //console.log(selected_book);
+      sb.book_title = book_title;
+      sb.book_content = book_content;
       sb.save();
+      console.log("saved book " + sb.book_title + "!");
     }
     else {
       // save new book
