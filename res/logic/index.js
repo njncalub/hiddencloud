@@ -13,7 +13,9 @@
 
   // Redirect to main page if already authorized:
   $(document).ready(function() {
-    initialise();
+    window.setInterval(function() {
+      initialise();
+    }, 5000);
   });
 
   // $(document).ajaxComplete(function() {
