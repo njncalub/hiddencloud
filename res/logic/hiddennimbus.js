@@ -367,7 +367,6 @@
 
     $("#book_title").val(selected_book.book_title);
     $("#book_content").val(selected_book.book_content);
-
   }
 
   function import_text_file(file)
