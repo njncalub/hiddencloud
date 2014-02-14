@@ -24,4 +24,18 @@ hiddencloud.Functions.moveCircle = function(gameObj, the_circle) {
   the_circle.runAction(move);
 }
 
+
+hiddencloud.Functions.defineWord = function(gameObj, word) {
+  var definitions;
+  var search_uri = "http://api.wordnik.com:80/v4/word.json/" + word + "/definitions?limit=200&includeRelated=true&sourceDictionaries=webster&useCanonical=false&includeTags=false&api_key=" + gameObj.auth.wordnik;
+
+  $.ajax({
+    async: false,
+    dataType: "json",
+    url: search_uri,
+    success: function(data) {definitions = data},
+  });
+  return definitions;
+}
+
 // hiddencloud.Functions.

@@ -1,7 +1,11 @@
-// trial2
 (function() {
   var Player, Book, Score, LogBook;
   var exports;
+
+  Nimbus.Auth.authorized_callback = function() {
+    console.log("authentication finished");
+    // send log to server
+  };
 
   create_log = function(type) {
     LogBook.create({
