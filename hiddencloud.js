@@ -21,7 +21,7 @@ hiddencloud.start = function() {
     version: 'v0.01',
     width: gameWidth,
     height: gameHeight,
-    renderer: lime.Renderer.CANVAS,
+    renderer: lime.Renderer.DOM,
     auth: {
       wordnik: '35e825cad76c600c5400405d8040951aa7826040da01ae6b3',
       hc_server_u: 'test',
@@ -32,13 +32,35 @@ hiddencloud.start = function() {
       sidePanelButtonWidth: gamePanelWidth-20,
       sidePanelButtonHeight: 20,
       sidePanelButtonPosition: gamePanelWidth/2,
+      font_family: "Open Sans",
     },
     player: {
-      profile: {},
-      badges: {},
-      reports: {},
+      coins: 0,
+      hi_score: 0,
+      hi_wpm: 0,
+      hi_cp: 0,
+      total_words: 0,
+      total_correct: 0,
+      total_wrong: 0,
     },
+    pprofile: {},
+    perks: {
+      coin_bonus: 0,
+      time_bonus: 0,
+      score_bonus: 0,
+    },
+    badges: {},
+    reports: {},
   };
+
+  gameObj.ui.bgm_01_au = new lime.audio.Audio("resources/audio/bgm/bgm_01.mp3");
+  gameObj.ui.click_button_au = new lime.audio.Audio("resources/audio/ui/click.wav");
+  gameObj.ui.select_category_au = new lime.audio.Audio("resources/audio/ui/select.wav");
+
+  gameObj.player.coins = 100;
+
+  // console.log(gameObj.player.profile);
+  // console.log(gameObj.player.profile.coins);
 
   hiddencloud.director = new lime.Director(document.getElementById("gamecanvas"), gameObj.width, gameObj.height);
   hiddencloud.director.makeMobileWebAppCapable();

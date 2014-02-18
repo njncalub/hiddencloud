@@ -12,6 +12,7 @@ goog.require('lime.GlossyButton');
 hiddencloud.Button = function(txt) {
     lime.GlossyButton.call(this, txt);
 
+    // this.borderWidth = 4;
     this.borderWidth = 4;
     this.setColor('#000');
 };
@@ -53,3 +54,32 @@ hiddencloud.Button.prototype.setColor = function(clr) {
     },this);
     return this;
 };
+
+/**
+ * Set button text.
+ * @param {string} txt Text.
+ * @return {lime.GlossyButton} object itself.
+ */
+hiddencloud.Button.prototype.setFontSize = function(num) {
+    this.upstate.label.setFontSize(num);
+    this.downstate.label.setFontSize(num);
+    return this;
+};
+
+hiddencloud.Button.prototype.setFontFamily = function(ff) {
+    this.upstate.label.setFontFamily(ff);
+    this.downstate.label.setFontFamily(ff);
+    return this;
+};
+
+hiddencloud.Button.prototype.setBorderWidth = function(num) {
+    this.borderWidth = num;
+    return this;
+};
+
+hiddencloud.Button.prototype.setBorderColor = function(clr) {
+    clr = lime.fill.parse(clr);
+    this.upstate.label.setFill(clr)
+    this.downstate.label.setFill(clr);
+    return this;
+}

@@ -115,15 +115,19 @@ window.hca_functions = (function() {
     });
   }
 
+  hca_functions.getRandomArbitary = function(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+
   hca_functions.get_book_genre = function() {
     var book_genre_uri = "http://hiddencloud.pythonanywhere.com/api/v1/book_genre/?format=json&" + hca_functions.auth_key;
 
     hca_functions.jax(book_genre_uri, 'GET').done(function (data) {
-        window.book_genres = [];
-        for (var i = 0; i < data.objects.length; i++) {
-          window.book_genres.push(data.objects[i]);
-        }
-        console.log( window.book_genres );
+      window.book_genres = [];
+      for (var i = 0; i < data.objects.length; i++) {
+        window.book_genres.push(data.objects[i]);
+      }
+      console.log( window.book_genres );
     });
   }
 
