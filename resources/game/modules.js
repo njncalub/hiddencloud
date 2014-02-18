@@ -256,7 +256,7 @@ hiddencloud.Modules.ChooseGenre = function(gameObj, time, f, current_game) {
     .setFontColor("#8c0000").setFontFamily(gameObj.ui.font_family);
 
   var btn_width_ratio = gameObj.width/1.3;
-  var btn_starting = (gameObj.height/2)-100;
+  var btn_starting = (gameObj.height/2)-110;
   var btn_height = 50;
   var btn_padding = 10;
 

@@ -73,7 +73,7 @@ hiddencloud.Functions.defineWord = function(gameObj, word) {
     async: false,
     dataType: "json",
     url: search_uri,
-    success: function(data) {definitions = data},
+    success: function(data) {definitions = data}
   });
   return definitions;
 }

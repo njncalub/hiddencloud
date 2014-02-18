@@ -25,14 +25,14 @@ hiddencloud.start = function() {
     auth: {
       wordnik: '35e825cad76c600c5400405d8040951aa7826040da01ae6b3',
       hc_server_u: 'test',
-      hc_server_k: '123456',
+      hc_server_k: '123456'
     },
     ui: {
       sidePanelWidth: gamePanelWidth,
       sidePanelButtonWidth: gamePanelWidth-20,
       sidePanelButtonHeight: 20,
       sidePanelButtonPosition: gamePanelWidth/2,
-      font_family: "Open Sans",
+      font_family: "Open Sans"
     },
     player: {
       coins: 0,
@@ -41,16 +41,16 @@ hiddencloud.start = function() {
       hi_cp: 0,
       total_words: 0,
       total_correct: 0,
-      total_wrong: 0,
+      total_wrong: 0
     },
     pprofile: {},
     perks: {
       coin_bonus: 0,
       time_bonus: 0,
-      score_bonus: 0,
+      score_bonus: 0
     },
     badges: {},
-    reports: {},
+    reports: {}
   };
 
   gameObj.ui.bgm_01_au = new lime.audio.Audio("resources/audio/bgm/bgm_01.mp3");
