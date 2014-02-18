@@ -1,8 +1,10 @@
 goog.provide('hiddencloud.Modules');
 
 goog.require('hiddencloud.Functions');
+goog.require('hiddencloud.Button');
 goog.require('lime.Scene');
 goog.require('lime.Layer');
+goog.require('lime.Button');
 goog.require('lime.Sprite');
 goog.require('lime.fill.LinearGradient');
 goog.require('lime.ui.Scroller');
@@ -11,18 +13,25 @@ hiddencloud.Modules.startGame = function(gameObj) {
   var layerStartMenu = new lime.Layer().setPosition(0, 0).setRenderer(gameObj.renderer).setAnchorPoint(0, 0);
   var sceneStartMenu = new lime.Scene().setRenderer(gameObj.renderer);
   var startMenuBackground = new lime.Sprite().setSize(gameObj.width, gameObj.height)
-    .setFill('#CCCCCC').setPosition(0, 0).setAnchorPoint(0, 0);
+    .setFill('#CCCCCC').setFill('resources/images/start_bg.png').setPosition(0, 0).setAnchorPoint(0, 0);
+  var hca_logo = new lime.Sprite().setSize(409.5, 132)
+    .setPosition(gameObj.width/2, (gameObj.height/2)-100).setFill('resources/images/hca_logo.png');
 
   var lblGameTitle = new lime.Label().setText(gameObj.title).setFontFamily('Arial')
     .setFontColor('#000').setFontWeight('bold').setSize(gameObj.width, gameObj.height/10).setFontSize(30)
     .setPosition(gameObj.width/2, (gameObj.height/2)-100);
 
-  var startGameButton = new lime.GlossyButton().setText('Start').setFontSize(15)
-    .setColor('#B0171F').setSize(gameObj.width/2.5, 50).setPosition(gameObj.width/2, gameObj.height/2)
+  var startGameButton = new hiddencloud.Button().setText('START')
+    .setColor('#B0171F').setSize(gameObj.width/2.5, 50).setPosition(gameObj.width/2, (gameObj.height/2)+75)
     .setAnchorPoint(0,0);
 
+  var lbl_followme = new lime.Label().setText("@njncalub").setFontFamily('Arial')
+    .setSize(gameObj.width, gameObj.height/10).setFontSize(11).setFontColor("#eff")
+    .setPosition(gameObj.width/2, gameObj.height-50)
+
   layerStartMenu.appendChild(startMenuBackground);
-  layerStartMenu.appendChild(lblGameTitle);
+  layerStartMenu.appendChild(hca_logo);
+  layerStartMenu.appendChild(lbl_followme);
   layerStartMenu.appendChild(startGameButton);
   sceneStartMenu.appendChild(layerStartMenu);
 
@@ -30,7 +39,19 @@ hiddencloud.Modules.startGame = function(gameObj) {
 
   goog.events.listen(startGameButton, ['mousedown', 'touchstart'], function(e) {
     // check if the player has a profile
-    hiddencloud.Modules.SpeedReadingBenchmark(gameObj);
+    if(hca_functions.has_user_profile()) {
+      gameObj.player.profile = window.current_player;
+      console.log("has");
+    }
+    else {
+      console.log("has not");
+      // set up profile
+      window.edit_profile();
+    }
+
+
+    // hiddencloud.Modules.SpeedReadingBenchmark(gameObj);
+
   });
 }
 
