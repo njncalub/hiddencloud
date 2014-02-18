@@ -1,7 +1,7 @@
 (function() {
 
   $(document).ready(function() {
-    // $('#birth_date').datepicker()
+    hca_functions.sync_model("all");
   });
 
 }).call(this);

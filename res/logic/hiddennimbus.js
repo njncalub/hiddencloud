@@ -18,6 +18,12 @@
     change_cluster_dropdown();
   });
 
+  // Create NimbusBase Models:
+  Player = Nimbus.Model.setup("Player", ["last_name", "first_name", "middle_name", "email_address", "gender", "cluster", "current_year", "department", "birth_date", "benchmark_speed", "benchmark_correct_items", "benchmark_wrong_items", "resource_uri"]);
+  Book = Nimbus.Model.setup("Book", ["book_title", "book_content", "book_url", "date_created"]);
+  Score = Nimbus.Model.setup("Score", ["score", "player", "date_created"]);
+  LogBook = Nimbus.Model.setup("LogBook", ["type", "date_created"]);
+
   $(function() {
     return Nimbus.Auth.set_app_ready(function() {
       console.log("app ready!");
@@ -47,12 +53,6 @@
       window.refresh_books();
     });
   });
-
-  // Create NimbusBase Models:
-  Player = Nimbus.Model.setup("Player", ["last_name", "first_name", "middle_name", "email_address", "gender", "cluster", "department", "birth_date"]);
-  Book = Nimbus.Model.setup("Book", ["book_title", "book_content", "book_url", "date_created"]);
-  Score = Nimbus.Model.setup("Score", ["score", "player", "date_created"]);
-  LogBook = Nimbus.Model.setup("LogBook", ["type", "date_created"]);
 
   var cluster_choices = [
     {
@@ -321,8 +321,9 @@
     load_cluster_department();
 
     // check if has existing profile:
-    if (Player.count() > 0) {
+    if (hca_functions.has_user_profile()) {
       player_profile = Player.last();
+      window.current_profile = player_profile;
 
       // replace placeholder text
       $("#last_name").val(player_profile.last_name);
@@ -331,6 +332,7 @@
       $("#birth_date").val(player_profile.birth_date);
       $("#email_address").val(player_profile.email_address);
       $("#gender").val(player_profile.gender);
+      $("#current_year").val(player_profile.current_year);
       $("#cluster").val(player_profile.cluster);
       $("#department").val(player_profile.department);
     }
@@ -502,11 +504,15 @@
     player_profile.birth_date = $("#birth_date").val();
     player_profile.email_address = $("#email_address").val();
     player_profile.gender = $("#gender").val();
+    player_profile.current_year = $("#current_year").val();
     player_profile.cluster = $("#cluster").val();
     player_profile.department = $("#department").val();
 
     player_profile.save();
+    window.current_profile = player_profile;
+    hca_functions.send_profile(player_profile);
 
+    // console.log(player_profile);
   };
 
   window.log_out = function() {

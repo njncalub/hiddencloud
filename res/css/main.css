@@ -115,6 +115,11 @@ border-radius: 0;
   position: absolute;
   width: 640px;
   height: 480px;
+  margin: 0 auto;
+}
+
+#canvas-panel {
+  margin-bottom: 10px;
 }
 
 .push {
@@ -165,3 +170,71 @@ footer .container {
 .navbar-brand img {
   padding-right: 5px;
 }*/
+
+#left-side-panel {
+  /*background-color: #ffffff;*/
+}
+
+#right-side-panel {
+  /*padding: 15px;*/
+  /*max-height: 500px;*/
+}
+
+.panel-custom {
+  border-color: #8c0000;
+  margin-bottom: 0px;
+  border-radius: 10px;
+}
+
+.panel-custom > .panel-heading {
+  color: #FFF;
+  text-align: center;
+  background-color: #8c0000;
+  border-color: #8c0000;
+}
+#leaderboard > .panel-body {
+  background-color: #f7f7f7;
+}
+#leaderboard th {
+  text-align: center;
+  background-color: #ebebeb;
+}
+#leaderboard td:nth-child(1) {
+   text-align: center;
+}
+#leaderboard td:nth-child(2) {
+   text-align: center;
+}
+#leaderboard td:nth-child(3) {
+   text-align: center;
+}
+#leaderboard td:nth-child(4) {
+   text-align: center;
+}
+#leaderboard td:nth-child(5) {
+   text-align: center;
+}
+
+.foot-note {
+  text-align: center;
+  font-weight: lighter;
+  font-style: italic;
+}
+
+#canvas-panel {
+  background: #8c0000; /* Old browsers */
+  background: -moz-radial-gradient(center, ellipse cover, #8c0000 48%, #510000 100%); /* FF3.6+ */
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(48%,#8c0000), color-stop(100%,#510000)); /* Chrome,Safari4+ */
+  background: -webkit-radial-gradient(center, ellipse cover, #8c0000 48%,#510000 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-radial-gradient(center, ellipse cover, #8c0000 48%,#510000 100%); /* Opera 12+ */
+  background: -ms-radial-gradient(center, ellipse cover, #8c0000 48%,#510000 100%); /* IE10+ */
+  background: radial-gradient(ellipse at center, #8c0000 48%,#510000 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8c0000', endColorstr='#510000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  /*background-image: url('../img/nami-pattern.png');*/
+}
+
+.modal-header {
+  background-color: #8C0000;
+  text-align: center;
+  color: #FFF;
+}

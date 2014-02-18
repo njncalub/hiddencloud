@@ -24,12 +24,19 @@ hiddencloud.start = function() {
     renderer: lime.Renderer.CANVAS,
     auth: {
       wordnik: '35e825cad76c600c5400405d8040951aa7826040da01ae6b3',
+      hc_server_u: 'test',
+      hc_server_k: '123456',
     },
     ui: {
       sidePanelWidth: gamePanelWidth,
       sidePanelButtonWidth: gamePanelWidth-20,
       sidePanelButtonHeight: 20,
       sidePanelButtonPosition: gamePanelWidth/2,
+    },
+    player: {
+      profile: {},
+      badges: {},
+      reports: {},
     },
   };
 
