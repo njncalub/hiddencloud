@@ -12,6 +12,7 @@
       "secret": "tu2qyn94u01k7p0",
       "app_name": "The Hidden Cloud Academy"
     },
+    "synchronous": false
   };
 
   Nimbus.Auth.setup(sync_object);

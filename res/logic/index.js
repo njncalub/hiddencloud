@@ -30,6 +30,7 @@
   function check_if_authorized() {
     console.log('check_if_authorized() called.');
     if (Nimbus.Auth.authorized()) {
+      // hca_functions.sync_model("all");
       console.log("user is authorized!");
       sendUserID();
       console.log("transferring to main page...");

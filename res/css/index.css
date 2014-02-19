@@ -37,6 +37,10 @@ a.btn {
   width: 180px;
 }
 
+.hidden-xs .btn {
+  width: 50%;
+}
+
 .visible-xs .btn {
   width: 100%;
 }

@@ -51,6 +51,8 @@
 
       Book.sync_all();
       window.refresh_books();
+
+      hca_functions.sync_model("all");
     });
   });
 
@@ -313,29 +315,55 @@
 
   window.edit_profile = function() {
     console.log("edit_profile() called.");
-    Player.sync_all();
+    // Player.sync_all();
     $('#editProfileModal').modal({
       keyboard: false,
     });
 
     load_cluster_department();
 
-    // check if has existing profile:
-    if (hca_functions.has_user_profile()) {
-      player_profile = Player.last();
-      window.current_profile = player_profile;
+    var started = Date.now();
+    var interval = setInterval(function() {
+      if (Date.now() - started > 5000) {
+        clearInterval(interval);
+      }
+      else {
+        // check if has existing profile:
+        if (hca_functions.has_user_profile()) {
+          load_cluster_department();
+          player_profile = Player.last();
+          window.current_profile = player_profile;
 
-      // replace placeholder text
-      $("#last_name").val(player_profile.last_name);
-      $("#first_name").val(player_profile.first_name);
-      $("#middle_name").val(player_profile.middle_name);
-      $("#birth_date").val(player_profile.birth_date);
-      $("#email_address").val(player_profile.email_address);
-      $("#gender").val(player_profile.gender);
-      $("#current_year").val(player_profile.current_year);
-      $("#cluster").val(player_profile.cluster);
-      $("#department").val(player_profile.department);
-    }
+          // replace placeholder text
+          $("#last_name").val(player_profile.last_name);
+          $("#first_name").val(player_profile.first_name);
+          $("#middle_name").val(player_profile.middle_name);
+          $("#birth_date").val(player_profile.birth_date);
+          $("#email_address").val(player_profile.email_address);
+          $("#gender").val(player_profile.gender);
+          $("#current_year").val(player_profile.current_year);
+          $("#cluster").val(player_profile.cluster);
+          $("#department").val(player_profile.department);
+        }
+      }
+    }, 1000);
+
+    // // check if has existing profile:
+    // if (hca_functions.has_user_profile()) {
+    //   player_profile = Player.last();
+    //   window.current_profile = player_profile;
+
+    //   // replace placeholder text
+    //   $("#last_name").val(player_profile.last_name);
+    //   $("#first_name").val(player_profile.first_name);
+    //   $("#middle_name").val(player_profile.middle_name);
+    //   $("#birth_date").val(player_profile.birth_date);
+    //   $("#email_address").val(player_profile.email_address);
+    //   $("#gender").val(player_profile.gender);
+    //   $("#current_year").val(player_profile.current_year);
+    //   $("#cluster").val(player_profile.cluster);
+    //   $("#department").val(player_profile.department);
+    // }
   };
 
 //!! MANAGE BOOKS FUNCTIONS:

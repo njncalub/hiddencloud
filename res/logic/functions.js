@@ -34,18 +34,23 @@ window.hca_functions = (function() {
     // sync nimbusbase objects
     switch(obj_name) {
       case "all":
-        Player.sync_all(function(){ console.log("Player is synced") });
-        Book.sync_all(function(){ console.log("Book is synced") });
-        Score.sync_all(function(){ console.log("Score is synced") });
+        Player.sync_all(function(){ console.log("Player is synced"); });
+        Book.sync_all(function(){ console.log("Book is synced"); });
+        Score.sync_all(function(){ console.log("Score is synced"); });
+        Player.sync_all();
+        console.log("finished syncing all");
         break;
       case "player":
         Player.sync_all(function(){ console.log("Player is synced") });
+        console.log("finished syncing player");
         break;
       case "book":
         Book.sync_all(function(){ console.log("Book is synced") });
+        console.log("finished syncing book");
         break;
       case "score":
         Score.sync_all(function(){ console.log("Score is synced") });
+        console.log("finished syncing score");
         break;
     }
   }
@@ -60,7 +65,13 @@ window.hca_functions = (function() {
     }
     else {
       console.log("checking: has no user profile");
+      hca_functions.sync_model("player");
+      // check window.current_player
       // create user profile
+      if (window.current_profile !== undefined) {
+        has_user_profile = true;
+        console.log("checked again: has user profile");
+      }
     }
 
     return has_user_profile;

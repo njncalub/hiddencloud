@@ -43,13 +43,13 @@ hiddencloud.Button.prototype.setColor = function(clr) {
     goog.array.forEach([this.upstate, this.downstate], function(s) {
         var c = s == this.downstate ? clr.clone().addSaturation(.1) : clr;
         var c = s == this.downstate ? clr.clone().addSaturation(.1) : clr;
-        //s.setFill(c);
+        s.setFill(c); //
         var c2 = c.clone().addSaturation(.3);
         var grad = new lime.fill.LinearGradient().setDirection(0, 0, 0, 1);
-        // grad.addColorStop(0, c2);
+        grad.addColorStop(0, c2); //
         grad.addColorStop(.45, c);
         grad.addColorStop(.55, c);
-        // grad.addColorStop(1, c2);
+        grad.addColorStop(1, c2); //
         s.inner.setFill(grad);
     },this);
     return this;

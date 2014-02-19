@@ -45,12 +45,13 @@ hiddencloud.Modules.startGame = function(gameObj) {
     // check if the player has a profile
     if(hca_functions.has_user_profile()) {
       gameObj.player.profile = window.current_player;
-      console.log("has");
+      console.log("going to menu selection");
       hiddencloud.Modules.MenuSelection(gameObj);
     }
     else {
-      console.log("has not");
+      console.log("please edit your profile first");
       // set up profile
+      hca_functions.sync_model("all");
       window.edit_profile();
     }
 
@@ -306,7 +307,7 @@ hiddencloud.Modules.ChooseGenre = function(gameObj, time, f, current_game) {
     .setFill("#4b4b4b").setPosition((c_size+c_padding)*13,0);
 
   // load genre from server
-  hiddencloud.Functions.getRandomGenres(gameObj, genres, btn_genre1, btn_genre2, btn_genre3);
+  hiddencloud.Functions.getRandomGenres(gameObj, current_game, genres, btn_genre1, btn_genre2, btn_genre3);
 
   layer_choose_genre.appendChild(bg_choose_genre);
   layer_choose_genre.appendChild(lbl_choose_a_genre);
@@ -333,6 +334,7 @@ hiddencloud.Modules.ChooseGenre = function(gameObj, time, f, current_game) {
   scene_choose_genre.appendChild(layer_genres);
   scene_choose_genre.appendChild(layer_difficulty);
 
+  // load color on current difficulty 
   switch(current_game.difficulty) {
     case 10:
       layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
@@ -383,23 +385,51 @@ hiddencloud.Modules.ChooseGenre = function(gameObj, time, f, current_game) {
   // after, go back here
 }
 
-// hiddencloud.Modules.ReadAndAnswer = function(gameObj, time, ){
-//    lime.Scene.call(this);
-//    this.curTime = 10;
-//    this.decreaseTime();
-// }
-// goog.inherits(poki.Stage1, lime.Scene);
-// hiddencloud.Modules.ReadAndAnswer.prototype.decreaseTime = function() {
-//   alert(this.curTime);
-// }
+hiddencloud.Modules.ReadAndAnswer = function(gameObj, current_game, text_question_object){
+  var scene_read_and_answer = new lime.Scene();
+  var layer_read_and_answer = new lime.Layer().setPosition(0, 0)
+    .setRenderer(gameObj.renderer).setAnchorPoint(0, 0);
+  var bg_read_and_answer = new lime.Sprite().setSize(gameObj.width, gameObj.height)
+  .setFill('#CCCCCC').setPosition(0, 0).setAnchorPoint(0, 0);
 
-hiddencloud.Modules.SpeedReadingBenchmark = function(gameObj) {
-  // load from question bank
-  // get text and questions
-  // introduction from characters about the academy
+  // set size vars
+  var set_spr_header = 50;
+  var set_scroller_width = gameObj.width-100;
+  var set_scroller_height = gameObj.height-set_spr_header;
+  var set_scroller_pos_w = (gameObj.width-set_scroller_width)/2;
+  var set_lbl_padding = 10;
+  var set_lbl_width = set_scroller_width-(set_lbl_padding*2);
+  var set_lbl_height = gameObj.height*5;
 
+  var lbl_book_title = new lime.Label().setText(text_question_object.from_book_text.from_book.title);
+
+  var lbl_text_here = new lime.labelMulti()
+    .setSize(set_lbl_width, set_lbl_height)
+    .setPosition(set_lbl_padding, set_lbl_padding).setAnchorPoint(0, 0)
+    .setText(text_question_object.from_book_text.text);
+
+  var scroller = new lime.ui.Scroller().setDirection(lime.ui.Scroller.Direction.VERTICAL);
+  scroller.setFill('#FF0000');
+  scroller.setSize(set_scroller_width, set_scroller_height);
+  scroller.setAnchorPoint(0, 0);
+  scroller.setPosition(set_scroller_pos_w, set_spr_header);
+  scroller.appendChild(lbl_text_here);
+  scroller.scrollTo(0);
+
+  layer_read_and_answer.appendChild(bg_read_and_answer);
+  layer_read_and_answer.appendChild(scroller);
+  scene_read_and_answer.appendChild(layer_read_and_answer);
+
+  hiddencloud.director.pushScene(scene_read_and_answer);
 
 }
+
+
+// hiddencloud.Modules.SpeedReadingBenchmark = function(gameObj) {
+//   // load from question bank
+//   // get text and questions
+//   // introduction from characters about the academy
+// }
 
 hiddencloud.Modules.startGameSample = function(gameObj) {
   var layerStartMenu = new lime.Layer().setPosition(0, 0).setRenderer(gameObj.renderer).setAnchorPoint(0, 0);
