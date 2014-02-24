@@ -1,6 +1,6 @@
 goog.provide('hiddencloud.Functions');
 
-goog.require('lime.GlossyButton');
+// goog.require('lime.GlossyButton');
 goog.require('lime.Circle');
 
 hiddencloud.Functions.load_all_books = function(gameObj) {
@@ -338,6 +338,8 @@ hiddencloud.Functions.getChoiceNumber = function(book_text_question, number) {
 }
 
 hiddencloud.Functions.randomizeBookChoicesButton = function(gameObj, current_game, book_text_question, btn_choice1, btn_choice2, btn_choice3) {
+  console.log("went here -- randomize book choices button");
+
   var order = [1, 2, 3];
       order = hiddencloud.Functions.shuffleArray(order);
       // sample [2, 3, 1]

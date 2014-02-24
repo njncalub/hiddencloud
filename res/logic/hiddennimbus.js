@@ -22,7 +22,7 @@
   Player = Nimbus.Model.setup("Player", ["last_name", "first_name", "middle_name", "email_address", "gender", "cluster", "current_year", "department", "birth_date", "benchmark_speed", "benchmark_correct_items", "benchmark_wrong_items", "resource_uri"]);
   Book = Nimbus.Model.setup("Book", ["book_title", "book_content", "book_url", "date_created"]);
   Score = Nimbus.Model.setup("Score", ["score", "player", "date_created"]);
-  GameResult = Nimbus.Model.setup("Result", ["training_date", "average_wpm", "average_rc", "total_correct", "quiz_score"]);
+  GameResult = Nimbus.Model.setup("GameResult", ["training_date", "average_wpm", "average_rc", "total_correct", "quiz_score"]);
   LogBook = Nimbus.Model.setup("LogBook", ["type", "date_created"]);
 
   $(function() {

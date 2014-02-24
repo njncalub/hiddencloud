@@ -3,7 +3,7 @@ goog.provide('hiddencloud');
 goog.require('lime.Director');
 goog.require('lime.Scene');
 goog.require('lime.Layer');
-goog.require('lime.GlossyButton');
+// goog.require('lime.GlossyButton');
 goog.require('lime.Circle');
 goog.require('lime.Label');
 

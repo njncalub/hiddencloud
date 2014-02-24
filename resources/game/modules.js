@@ -4,12 +4,12 @@ goog.require('hiddencloud.Functions');
 goog.require('hiddencloud.Button');
 goog.require('lime.Scene');
 goog.require('lime.Layer');
-goog.require('lime.Button');
+// goog.require('lime.Button');
 goog.require('lime.Sprite');
 goog.require('lime.fill.LinearGradient');
 goog.require('lime.ui.Scroller');
 goog.require('lime.audio.Audio');
-goog.require('lime.LabelMulti');
+// goog.require('lime.LabelMulti');
 
 hiddencloud.Modules.startGame = function(gameObj) {
   gameObj.ui.bgm_01_au.play();
@@ -409,26 +409,26 @@ hiddencloud.Modules.ChooseGenre = function(gameObj, current_game) {
   hiddencloud.director.replaceScene(scene_choose_genre);
 
   if(current_game.difficulty == 4) {
-    console.log("current difficulty is 4!");
+    // console.log("current difficulty is 4!");
     var wpm = hiddencloud.Functions.getWPM(current_game, 0, 2); // 1,2,3
-    console.log(wpm);
+    // console.log(wpm);
     hiddencloud.Modules.startMovingBall(gameObj, current_game, wpm);
   }
   if(current_game.difficulty == 7) {
-    console.log("current difficulty is 7!");
+    // console.log("current difficulty is 7!");
     var wpm = hiddencloud.Functions.getWPM(current_game, 3, 5); // 4,5,6
-    console.log(wpm);
+    // console.log(wpm);
     hiddencloud.Modules.startMovingBall(gameObj, current_game, wpm);
   }
   if(current_game.difficulty == 10) {
-    console.log("current difficulty is 10!");
+    // console.log("current difficulty is 10!");
     // var wpm = hiddencloud.Functions.getWPM(current_game, current_game.difficulty, current_game.difficulty+1);
     var wpm = hiddencloud.Functions.getWPM(current_game, 6, 8); // 7,8,9
-    console.log(wpm);
+    // console.log(wpm);
     hiddencloud.Modules.startMovingBall(gameObj, current_game, wpm);
   }
   if(current_game.difficulty >= 11) {
-    console.log("current difficulty is 11!");
+    // console.log("current difficulty is 11!");
     console.log("ending game...");
     // var wpm = hiddencloud.Functions.getWPM(current_game, current_game.difficulty, current_game.difficulty+1);
     // var wpm = hiddencloud.Functions.getWPM(current_game, 6, 8); // 7,8,9
@@ -456,11 +456,20 @@ hiddencloud.Modules.ReadBookText = function(gameObj, current_game, text_question
   current_game.book_text.push(chosen_b_t);
   current_game.total_words.push(chosen_b_t.total_words);
 
-  console.log("total_words: ");
-  console.log(current_game.total_words);
+  // console.log("chosen_b_t");
+  // console.log(chosen_b_t);
+  // console.log("chosen_q_and_c");
+  // console.log(chosen_q_and_c);
+  // console.log("current_game.book_text");
+  // console.log(current_game.book_text);
+  // console.log("current_game.total_words");
+  // console.log(current_game.total_words);
+
+  // console.log("total_words: ");
+  // console.log(current_game.total_words);
 
   if(current_game.difficulty == 10) {
-      console.log("entering rsvp mode");
+      // console.log("entering rsvp mode");
       hiddencloud.Modules.startRapidSerialVisualPresentation(gameObj, current_game, chosen_b_t, chosen_q_and_c);
   }
   else {
@@ -468,7 +477,9 @@ hiddencloud.Modules.ReadBookText = function(gameObj, current_game, text_question
     var layer_read_and_answer = new lime.Layer().setPosition(0, 0)
       .setRenderer(gameObj.renderer).setAnchorPoint(0, 0);
     var bg_read_and_answer = new lime.Sprite().setSize(gameObj.width, gameObj.height)
-    .setFill('#CCCCCC').setPosition(0, 0).setAnchorPoint(0, 0);
+      .setFill('#CCCCCC').setPosition(0, 0).setAnchorPoint(0, 0);
+    var bg_highlight_line = new lime.Sprite().setSize(gameObj.width, 30)
+      .setFill('#');
 
     // set size vars
     var set_spr_header = 50;
@@ -552,7 +563,7 @@ hiddencloud.Modules.ReadBookText = function(gameObj, current_game, text_question
       current_game.current_reading_time = -1;
       current_reading_time = -1;
 
-      console.log(current_game.total_time);
+      // console.log(current_game.total_time);
 
       hiddencloud.Functions.getWPM(gameObj, current_game, current_game.difficulty-1, current_game.difficulty);
 
@@ -598,12 +609,19 @@ hiddencloud.Modules.ReadBookText = function(gameObj, current_game, text_question
       }
       hiddencloud.Modules.AnswerBookTextQuestion(gameObj, current_game, chosen_b_t, chosen_q_and_c);
 
+
       // var genre =  hiddencloud.Modules.ChooseGenre(gameObj, current_game, current_game.time, f);
     });
   }
 }
 
 hiddencloud.Modules.AnswerBookTextQuestion = function(gameObj, current_game, book_text, book_text_question) {
+
+  // console.log("went here -- answer book text question");
+  // console.log("book_text");
+  // console.log(book_text);
+  // console.log("book_text_question");
+  // console.log(book_text_question);
 
   var scene_answer_btq = new lime.Scene();
   var layer_answer_btq = new lime.Layer().setPosition(0, 0)
@@ -643,15 +661,18 @@ hiddencloud.Modules.AnswerBookTextQuestion = function(gameObj, current_game, boo
 
   var btn_choice1 = new hiddencloud.Button().setColor(btn_color).setSize(btn_width_ratio, btn_height).setAnchorPoint(0,0)
     .setPosition(gameObj.width/2, btn_starting+((btn_height + btn_padding)*1))
-    .setText("CHOICE 1").setFontSize(13).setLabelSize(btn_width_ratio, btn_height);
+    .setText("CHOICE 1").setFontSize(13);
+    // .setLabelSize(btn_width_ratio, btn_height);
 
   var btn_choice2 = new hiddencloud.Button().setColor(btn_color).setSize(btn_width_ratio, btn_height).setAnchorPoint(0,0)
     .setPosition(gameObj.width/2, btn_starting+((btn_height + btn_padding)*2))
-    .setText("CHOICE 2").setFontSize(13).setLabelSize(btn_width_ratio, btn_height);
+    .setText("CHOICE 2").setFontSize(13);
+    // .setLabelSize(btn_width_ratio, btn_height);
 
   var btn_choice3 = new hiddencloud.Button().setColor(btn_color).setSize(btn_width_ratio, btn_height).setAnchorPoint(0,0)
     .setPosition(gameObj.width/2, btn_starting+((btn_height + btn_padding)*3))
-    .setText("CHOICE 3").setFontSize(13).setLabelSize(btn_width_ratio, btn_height);
+    .setText("CHOICE 3").setFontSize(13);
+    // .setLabelSize(btn_width_ratio, btn_height);
 
   layer_answer_btq.appendChild(bg_answer_btq);
   layer_answer_btq.appendChild(scroller);
@@ -691,6 +712,13 @@ hiddencloud.Modules.startMovingBall = function(gameObj, current_game, average_wp
 
   var red_ball = new lime.Circle().setSize(ball_radius, ball_radius)
       .setFill('#B0171F').setPosition(gameObj.width/2, gameObj.height/2);
+
+  if (current_game.difficulty > 5) {
+    red_ball.setFill('#BEBEBE');
+  }
+  if (current_game.difficulty > 8) {
+    red_ball.setFill('#DCDCDC');
+  }
 
   for (var i = 0; i < 2; i++) {
     position.push([0+padding, 0+padding]);
@@ -732,8 +760,8 @@ hiddencloud.Modules.startMovingBall = function(gameObj, current_game, average_wp
   // var dt = 500;
   var dt = hiddencloud.Functions.getMovingBallDT(average_wpm); // range = 600 - 350
 
-  console.log("average_wpm: " + average_wpm);
-  console.log("dt: " + dt);
+  // console.log("average_wpm: " + average_wpm);
+  // console.log("dt: " + dt);
 
   var fun;
   lime.scheduleManager.scheduleWithDelay(fun=function() {
@@ -807,7 +835,7 @@ hiddencloud.Modules.startRapidSerialVisualPresentation = function(gameObj, curre
       current_game.current_reading_time = -1;
       current_reading_time = -1;
 
-      console.log(current_game.total_time);
+      // console.log(current_game.total_time);
 
       lime.scheduleManager.unschedule(displayTextFunction, lbl_big_text);
       current_game.difficulty += 1;
@@ -835,7 +863,7 @@ hiddencloud.Modules.endOfQuiz = function(gameObj, current_game) {
   var bg_header = new lime.Sprite().setSize(gameObj.width, 60).setAnchorPoint(0,0)
     .setFill("#141414").setPosition(0, 0);
 
-  var awpm_here = hiddencloud.Functions.getWPM(current_game, 0, 9);
+  var awpm_here = Math.round(hiddencloud.Functions.getWPM(current_game, 0, 9));
   var rc_here = hiddencloud.Functions.getReadingComprehension(current_game.choices);
   var score_here = hiddencloud.Functions.getScore(current_game, current_game.difficulty-1);
   var tweet_text = "Tweet Results:\r\nI can read " + awpm_here + " WPM and have an average " + rc_here + "% comprehension! Test your speed now! #hiddencloudacademy http://j.mp/hiddencloud";
@@ -846,7 +874,7 @@ hiddencloud.Modules.endOfQuiz = function(gameObj, current_game) {
   var in_minutes = Math.round(random_book_mins%60);
   var correct_here = hiddencloud.Functions.getCorrectAnswers(current_game.choices);
 
-  var result = GameResult.create({
+  var game_result = GameResult.create({
     "training_date": new Date(),
     "average_wpm": awpm_here,
     "average_rc": rc_here,
@@ -854,11 +882,12 @@ hiddencloud.Modules.endOfQuiz = function(gameObj, current_game) {
     "quiz_score": score_here
   });
 
-  // send results to server
-
   console.log(random_book_mins);
   console.log(in_hours);
   console.log(in_minutes);
+  game_result.save();
+  console.log(game_result);
+  // send results to server
 
   var lbl_quote = new lime.Label().setSize(gameObj.width, 60)
     .setText("You can read " + random_book.title + " in " + in_hours + " hours and " + in_minutes + " minutes.")

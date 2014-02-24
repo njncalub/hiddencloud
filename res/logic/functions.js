@@ -176,7 +176,10 @@ window.hca_functions = (function() {
   }
 
   hca_functions.send_game_result = function(result) {
-    
+    var rdata = {
+      "uid": 
+
+    };
   }
 
   return hca_functions;
