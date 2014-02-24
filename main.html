@@ -43,6 +43,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="#" onclick="window.edit_profile()">Edit Profile</a></li>
+                <li><a href="#" onclick="window.edit_profile()">View Progress</a></li>
                 <!-- <li><a href="#" onclick="window.manage_books()">Manage Books</a></li> -->
                 <li class="divider"></li>
                 <li><a href="#" onclick="window.log_out()">Logout</a></li>
@@ -112,8 +113,10 @@
               <select id="department" class="form-control">
               </select>
             </div>
-
+            <p style="font-size: 10pt; font-style: italic;">Profile is still a little buggy. Please refresh browser if you already added a profile. Thanks!</p>
           </div>
+<!--           <div class="push-left">
+          </div> -->
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             <button type="button" class="btn btn-danger" onclick="window.save_profile()">Save changes</button>

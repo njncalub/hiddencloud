@@ -66,6 +66,13 @@ hiddencloud.Button.prototype.setFontSize = function(num) {
     return this;
 };
 
+hiddencloud.Button.prototype.setLabelSize = function(w, h) {
+    var padding = 10;
+    this.upstate.label.setSize(w-padding, h-padding)
+    this.downstate.label.setFill(w-padding, h-padding);
+    return this;
+};
+
 hiddencloud.Button.prototype.setFontFamily = function(ff) {
     this.upstate.label.setFontFamily(ff);
     this.downstate.label.setFontFamily(ff);

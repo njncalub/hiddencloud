@@ -32,7 +32,7 @@
     if (Nimbus.Auth.authorized()) {
       // hca_functions.sync_model("all");
       console.log("user is authorized!");
-      sendUserID();
+      // sendUserID();
       console.log("transferring to main page...");
       window.location = "main.html";
     }
@@ -45,7 +45,7 @@
   $(document).ready(function() {
     window.setInterval(function() {
       check_if_authorized();
-    }, 5000);
+    }, 1000);
   });
 
 }).call(this);

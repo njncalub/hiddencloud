@@ -22,6 +22,7 @@
   Player = Nimbus.Model.setup("Player", ["last_name", "first_name", "middle_name", "email_address", "gender", "cluster", "current_year", "department", "birth_date", "benchmark_speed", "benchmark_correct_items", "benchmark_wrong_items", "resource_uri"]);
   Book = Nimbus.Model.setup("Book", ["book_title", "book_content", "book_url", "date_created"]);
   Score = Nimbus.Model.setup("Score", ["score", "player", "date_created"]);
+  GameResult = Nimbus.Model.setup("Result", ["training_date", "average_wpm", "average_rc", "total_correct", "quiz_score"]);
   LogBook = Nimbus.Model.setup("LogBook", ["type", "date_created"]);
 
   $(function() {
@@ -324,8 +325,9 @@
 
     var started = Date.now();
     var interval = setInterval(function() {
-      if (Date.now() - started > 5000) {
+      if (Date.now() - started > 7000) {
         clearInterval(interval);
+        console.log(Player.all());
       }
       else {
         // check if has existing profile:
@@ -344,9 +346,10 @@
           $("#current_year").val(player_profile.current_year);
           $("#cluster").val(player_profile.cluster);
           $("#department").val(player_profile.department);
+          console.log(Player.all());
         }
       }
-    }, 1000);
+    }, 100);
 
     // // check if has existing profile:
     // if (hca_functions.has_user_profile()) {
@@ -539,6 +542,8 @@
     player_profile.save();
     window.current_profile = player_profile;
     hca_functions.send_profile(player_profile);
+
+    $('#editProfileModal').modal('hide');
 
     // console.log(player_profile);
   };

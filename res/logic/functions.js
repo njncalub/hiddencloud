@@ -175,6 +175,10 @@ window.hca_functions = (function() {
     }
   }
 
+  hca_functions.send_game_result = function(result) {
+    
+  }
+
   return hca_functions;
 
 }());
