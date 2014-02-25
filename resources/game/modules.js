@@ -70,7 +70,7 @@ hiddencloud.Modules.MenuSelection = function(gameObj) {
   var layer_menu_bg = new lime.Sprite().setSize(gameObj.width, gameObj.height)
     .setFill('#CCCCCC').setFill('resources/images/start_bg.png').setPosition(0, 0).setAnchorPoint(0, 0);
   var hca_logo = new lime.Sprite().setSize(409.5, 132)
-    .setPosition(gameObj.width/2, (gameObj.height/2)-100).setFill('resources/images/hca_logo.png');
+    .setPosition(gameObj.width/2, (gameObj.height/2)-100).setFill('resources/images/srcdojo_logo.png');
   var label_hi_score = new lime.Label().setText("HIGH SCORE: " + gameObj.player.hi_score).setAnchorPoint(0, 0)
     .setPosition(20, 20).setFontSize(13);
   var label_hi_wpm = new lime.Label().setText("READING SPEED: " + gameObj.player.hi_wpm).setAnchorPoint(0, 0)
@@ -84,14 +84,15 @@ hiddencloud.Modules.MenuSelection = function(gameObj) {
 
   var btn_width_ratio = gameObj.width/2;
   var btn_starting = (gameObj.height/2)+10;
-  var btn_height = 35;
+  // var btn_height = 35;
+  var btn_height = 50;
   var btn_padding = 3;
 
   var scroll_menu = new lime.ui.Scroller().setAnchorPoint(0, 0).setSize(400, 130);
 
   var btn_play = new hiddencloud.Button().setColor('#B0171F').setSize(btn_width_ratio, btn_height).setAnchorPoint(0,0)
     .setPosition(gameObj.width/2, btn_starting+((btn_height + btn_padding)*1))
-    .setText("START QUIZ").setFontSize(16);
+    .setText("START TRAINING").setFontSize(16);
   var btn_shop = new hiddencloud.Button().setColor('#B0171F').setSize(btn_width_ratio, btn_height).setAnchorPoint(0,0)
     .setPosition(gameObj.width/2, btn_starting+((btn_height + btn_padding)*2))
     .setText("SPEND COINS").setFontSize(16);
@@ -107,12 +108,12 @@ hiddencloud.Modules.MenuSelection = function(gameObj) {
   // layer_menu.appendChild(label_hi_score);
   // layer_menu.appendChild(label_hi_wpm);
   // layer_menu.appendChild(label_hi_cp);
-  layer_menu.appendChild(label_coins);
+  // layer_menu.appendChild(label_coins);
   layer_menu.appendChild(scroll_menu);
   layer_menu.appendChild(btn_play);
-  layer_menu.appendChild(btn_shop);
-  layer_menu.appendChild(btn_tutorial);
-  layer_menu.appendChild(btn_train);
+  // layer_menu.appendChild(btn_shop);
+  // layer_menu.appendChild(btn_tutorial);
+  // layer_menu.appendChild(btn_train);
   scene_menu.appendChild(layer_menu);
 
   // var menu_scroller = new lime.ui.Scroller().setFill('#ccc').setAnchorPoint(0, 0.5).setSize(400, 130);
@@ -182,6 +183,8 @@ hiddencloud.Modules.StartQuiz = function(gameObj) {
   current_game.chosen_q_and_c_h = [];
   current_game.chosen_q_and_c_x = [];
 
+  current_game.current_speed = 1500;
+
   var scene_start_quiz = new lime.Scene();
   var layer_start_quiz = new lime.Layer().setPosition(0, 0)
     .setRenderer(gameObj.renderer).setAnchorPoint(0, 0);
@@ -235,8 +238,9 @@ hiddencloud.Modules.StartQuiz = function(gameObj) {
   // var genre =  hiddencloud.Modules.ChooseGenre(gameObj, current_game, current_game.time, f);
   
   // hiddencloud.Modules.startMovingBall(gameObj, current_game, 400);
-  var genre =  hiddencloud.Modules.ChooseGenre(gameObj, current_game);
   // hiddencloud.Modules.endOfQuiz(gameObj, current_game);
+  // var genre =  hiddencloud.Modules.ChooseGenre(gameObj, current_game);
+  hiddencloud.Modules.startBenchmarkSpeed(gameObj, current_game);
 }
 
 // hiddencloud.Modules.ChooseGenre = function(gameObj, current_game, time, f) {
@@ -302,33 +306,35 @@ hiddencloud.Modules.ChooseGenre = function(gameObj, current_game) {
   var bg_line = new lime.Sprite().setSize(gameObj.width, l_size).setAnchorPoint(0,0)
     .setFill("#141414").setPosition(0, c_size/2);
 
+  var btn_normal_var = "#252525";
+
   // #138113
   var e1 = new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
-    .setFill("#4b4b4b").setPosition((c_size+c_padding)*1,0);
+    .setFill(btn_normal_var).setPosition((c_size+c_padding)*1,0);
   var e2 = new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
-    .setFill("#4b4b4b").setPosition((c_size+c_padding)*2,0);
+    .setFill(btn_normal_var).setPosition((c_size+c_padding)*2,0);
   var e3 = new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
-    .setFill("#4b4b4b").setPosition((c_size+c_padding)*3,0);
+    .setFill(btn_normal_var).setPosition((c_size+c_padding)*3,0);
 
   // #DDDD00
   var m1 = new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
-    .setFill("#4b4b4b").setPosition((c_size+c_padding)*5,0);
+    .setFill(btn_normal_var).setPosition((c_size+c_padding)*5,0);
   var m2 = new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
-    .setFill("#4b4b4b").setPosition((c_size+c_padding)*6,0);
+    .setFill(btn_normal_var).setPosition((c_size+c_padding)*6,0);
   var m3 = new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
-    .setFill("#4b4b4b").setPosition((c_size+c_padding)*7,0);
+    .setFill(btn_normal_var).setPosition((c_size+c_padding)*7,0);
 
   // #8c0000
   var h1 = new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
-    .setFill("#4b4b4b").setPosition((c_size+c_padding)*9,0);
+    .setFill(btn_normal_var).setPosition((c_size+c_padding)*9,0);
   var h2 = new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
-    .setFill("#4b4b4b").setPosition((c_size+c_padding)*10,0);
+    .setFill(btn_normal_var).setPosition((c_size+c_padding)*10,0);
   var h3 = new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
-    .setFill("#4b4b4b").setPosition((c_size+c_padding)*11,0);
+    .setFill(btn_normal_var).setPosition((c_size+c_padding)*11,0);
 
   // #3f3f3f
   var x1 = new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
-    .setFill("#4b4b4b").setPosition((c_size+c_padding)*13,0);
+    .setFill(btn_normal_var).setPosition((c_size+c_padding)*13,0);
 
   // load genre from server
   hiddencloud.Functions.getRandomGenres(gameObj, current_game, genres, btn_genre1, btn_genre2, btn_genre3);
@@ -359,38 +365,89 @@ hiddencloud.Modules.ChooseGenre = function(gameObj, current_game) {
   scene_choose_genre.appendChild(layer_difficulty);
 
   // load color on current difficulty 
+  var color_current = "#4b4b4b";
   switch(current_game.difficulty) {
     case 11:
     case 10:
-      layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
-        .setFill("#4b4b4b").setPosition((c_size+c_padding)*13,0));
+      if(current_game.difficulty == 10) {
+        x1.setFill(color_current);
+      }
+      if(current_game.choices[9] == 1) {
+        layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
+          .setFill("#3f3f3f").setPosition((c_size+c_padding)*13,0));
+      }
     case 9:
-      layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
-        .setFill("#8c0000").setPosition((c_size+c_padding)*11,0));
+      if(current_game.difficulty == 9) {
+        h3.setFill(color_current);
+      }
+      if(current_game.choices[8] == 1) {
+        layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
+          .setFill("#8c0000").setPosition((c_size+c_padding)*11,0));
+      }
     case 8:
-      layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
-        .setFill("#8c0000").setPosition((c_size+c_padding)*10,0));
+      if(current_game.difficulty == 8) {
+        h2.setFill(color_current);
+      }
+      if(current_game.choices[7] == 1) {
+        layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
+          .setFill("#8c0000").setPosition((c_size+c_padding)*10,0));
+      }
     case 7:
-      layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
-        .setFill("#8c0000").setPosition((c_size+c_padding)*9,0));
+      if(current_game.difficulty == 7) {
+        h1.setFill(color_current);
+      }
+      if(current_game.choices[6] == 1) {
+        layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
+          .setFill("#8c0000").setPosition((c_size+c_padding)*9,0));
+      }
     case 6:
-      layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
-        .setFill("#DDDD00").setPosition((c_size+c_padding)*7,0));
+      if(current_game.difficulty == 6) {
+        m3.setFill(color_current);
+      }
+      if(current_game.choices[5] == 1) {
+        layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
+          .setFill("#DDDD00").setPosition((c_size+c_padding)*7,0));
+      }
     case 5:
-      layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
-        .setFill("#DDDD00").setPosition((c_size+c_padding)*6,0));
+      if(current_game.difficulty == 5) {
+        m2.setFill(color_current);
+      }
+      if(current_game.choices[4] == 1) {
+        layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
+          .setFill("#DDDD00").setPosition((c_size+c_padding)*6,0));
+      }
     case 4:
-      layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
-        .setFill("#DDDD00").setPosition((c_size+c_padding)*5,0));
+      if(current_game.difficulty == 4) {
+        m1.setFill(color_current);
+      }
+      if(current_game.choices[3] == 1) {
+        layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
+          .setFill("#DDDD00").setPosition((c_size+c_padding)*5,0));
+      }
     case 3:
-      layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
-        .setFill("#138113").setPosition((c_size+c_padding)*3,0));
+      if(current_game.difficulty == 3) {
+        e3.setFill(color_current);
+      }
+      if(current_game.choices[2] == 1) {
+        layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
+          .setFill("#138113").setPosition((c_size+c_padding)*3,0));
+      }
     case 2:
-      layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
-        .setFill("#138113").setPosition((c_size+c_padding)*2,0));
+      if(current_game.difficulty == 2) {
+        e2.setFill(color_current);
+      }
+      if(current_game.choices[1] == 1) {
+        layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
+          .setFill("#138113").setPosition((c_size+c_padding)*2,0));
+      }
     case 1:
-      layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
-        .setFill("#138113").setPosition((c_size+c_padding)*1,0));
+      if(current_game.difficulty == 1) {
+        e1.setFill(color_current);
+      }
+      if(current_game.choices[0] == 1) {
+        layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
+          .setFill("#138113").setPosition((c_size+c_padding)*1,0));
+      }
   }
 
   // console.log("current_game.choices");
@@ -441,6 +498,122 @@ hiddencloud.Modules.ChooseGenre = function(gameObj, current_game) {
   // after, go back here
 }
 
+
+hiddencloud.Modules.startBenchmarkSpeed = function(gameObj, current_game) {
+
+  var scene_benchmark = new lime.Scene();
+  var layer_benchmark = new lime.Layer().setPosition(0, 0)
+    .setRenderer(gameObj.renderer).setAnchorPoint(0, 0);
+  var bg_benchmark = new lime.Sprite().setSize(gameObj.width, gameObj.height)
+    .setFill('#CCCCCC').setPosition(0, 0).setAnchorPoint(0, 0);
+
+  // set size vars
+  var set_spr_header = 50;
+  var set_spr_footer = 80;
+  var set_scroller_width = gameObj.width-20;
+  var set_scroller_height = gameObj.height-set_spr_header-set_spr_footer;
+  var set_scroller_pos_w = (gameObj.width-set_scroller_width)/2;
+  var set_lbl_padding = 10;
+  var set_lbl_width = set_scroller_width-(set_lbl_padding*2);
+  var set_lbl_height = gameObj.height*5;
+
+  var lbl_book_title = new lime.Label()
+    // .setSize(gameObj.width, set_spr_header)
+    .setPosition(gameObj.width/2, set_spr_header/2)
+    .setFontWeight(600);
+  lbl_book_title.setText("Read the following text normally to find your present reading level. Don't skip.");
+
+  var benchmark_text = "To gauge your progress, you must first find your base speed. " +
+                       "Your base speed is the speed that you can read this passage of text with full comprehension. " + 
+                       "This is timed but please read this text at your normal pace." +
+                       "\r\n\r\n" +
+                       "Most people have an average speed of 200 wpm (words per minute), which is also as fast as they can speak. " +
+                       "Speed reading is a technique used by people around the world to read text more quickly by training the person's \"inner voice\". " + 
+                       "When you read, you usually experience subvocalization where you vocalize each word in your head. " +
+                       "This poses as a major problem in speed because it takes time to subvocalize each word and you can only read as fast as you speak." +
+                       "\r\n\r\n" +
+                       "However, by glancing at the words in just a few milliseconds, your head won't have time to subvocalize. " +
+                       "By silencing your inner voice, you can read at a much greater speed with better reading comprehension (through constant training). " +
+                       "In the real world, you can speed read through methods like using a finger or pen to point and guide your eyes through each line of text at a speed faster than you can normally read. " +
+                       "This works because the eye is very good at tracking movement. " + 
+                       "Even if at this point full reading comprehension is lost, it's exactly this method of training that will allow you to read faster." +
+                       "\r\n\r\n" +
+                       "This game uses Meta Guiding to speed up eye movement and intake of the Visual Cortex and uses Rapid Serial Visual Presentation (RSVP) to improve peripheral vision. " +
+                       "There are ten questions in total. " + 
+                       "Start by choosing a random genre for your passage. " + 
+                       "Try to speed read the lines as fast as you can by following the highlighted area. " + 
+                       "If it is too fast or too slow, you can adjust the speed through the (-) and (+) buttons. " +
+                       "To test your comprehension, you need to answer a related question afterwards." +
+                       "\r\n\r\n" +
+                       "Now click finish reading to start your training. Good luck!";
+
+  var lbl_text_here = new lime.Label()
+    .setSize(set_lbl_width, set_lbl_height)
+    .setPosition(set_lbl_padding, set_lbl_padding).setAnchorPoint(0, 0)
+    .setText(benchmark_text).setMultiline(true)
+    .setAlign("left").setFontFamily('Open Sans');
+
+  var scroller = new lime.ui.Scroller().setDirection(lime.ui.Scroller.Direction.VERTICAL);
+      scroller.setFill('#B1B1B1');
+      scroller.setSize(set_scroller_width, set_scroller_height);
+      scroller.setAnchorPoint(0, 0);
+      scroller.setPosition(set_scroller_pos_w, set_spr_header);
+      scroller.appendChild(lbl_text_here);
+      scroller.scrollTo(0);
+
+  var btn_width_ratio = gameObj.width/1.3;
+  var btn_side_width = (gameObj.width - btn_width_ratio)/2;
+  var btn_starting = gameObj.height-100;
+  var btn_height = 50;
+  var btn_padding = 10;
+
+  var btn_read = new hiddencloud.Button().setColor('#B0171F').setSize(btn_width_ratio-(btn_padding*4), btn_height).setAnchorPoint(0,0)
+    .setPosition(gameObj.width/2, btn_starting+((btn_height + btn_padding)*1))
+    .setText("FINISHED READING").setFontSize(15);
+
+  layer_benchmark.appendChild(bg_benchmark);
+  layer_benchmark.appendChild(lbl_book_title);
+  layer_benchmark.appendChild(scroller);
+  layer_benchmark.appendChild(btn_read);
+  scene_benchmark.appendChild(layer_benchmark);
+
+  hiddencloud.director.replaceScene(scene_benchmark);
+
+  current_game.current_reading_time = 0;
+
+  var increaseReadingTime, dt = 1000;
+  var current_reading_time = current_game.current_reading_time;
+  lime.scheduleManager.scheduleWithDelay(increaseReadingTime=function() {
+    if (current_reading_time >= 0) {
+      current_reading_time = hiddencloud.Functions.increaseTime(current_reading_time);
+      current_game.current_reading_time = current_reading_time;
+    }
+  }, current_game.current_reading_time, dt);
+
+  // when clicked finished reading
+  goog.events.listen(btn_read, ['mousedown', 'touchstart'], function(e) {
+    lime.scheduleManager.unschedule(increaseReadingTime, current_game.current_reading_time);
+    current_game.benchmark_time = current_game.current_reading_time;
+    current_game.benchmark_total_words = benchmark_text.match(/\S+/g).length;
+    current_game.current_reading_time = -1;
+    current_reading_time = -1;
+
+    console.log("current_game.benchmark_total_words");
+    console.log(current_game.benchmark_total_words);
+    console.log("current_game.benchmark_time");
+    console.log(current_game.benchmark_time);
+
+    current_game.benchmark_speed = hiddencloud.Functions.getBenchmarkWPM(current_game, current_game.benchmark_total_words, current_game.benchmark_time);
+    console.log("current_game.benchmark_speed");
+    console.log(current_game.benchmark_speed);
+
+    var genre =  hiddencloud.Modules.ChooseGenre(gameObj, current_game);
+
+    // hiddencloud.Modules.AnswerBookTextQuestion(gameObj, current_game, chosen_b_t, chosen_q_and_c);
+    // var genre =  hiddencloud.Modules.ChooseGenre(gameObj, current_game, current_game.time, f);
+  });
+}
+
 hiddencloud.Modules.ReadBookText = function(gameObj, current_game, text_question_object){
   var chosen_b_t = {};
       chosen_b_t.text = text_question_object.from_book_text.text;
@@ -478,8 +651,10 @@ hiddencloud.Modules.ReadBookText = function(gameObj, current_game, text_question
       .setRenderer(gameObj.renderer).setAnchorPoint(0, 0);
     var bg_read_and_answer = new lime.Sprite().setSize(gameObj.width, gameObj.height)
       .setFill('#CCCCCC').setPosition(0, 0).setAnchorPoint(0, 0);
-    var bg_highlight_line = new lime.Sprite().setSize(gameObj.width, 30)
-      .setFill('#');
+    var bg_highlight_line = new lime.Sprite().setSize(gameObj.width, 20)
+      .setFill('#FFF154').setAnchorPoint(0, 0)
+      // .setPosition(0, 9);
+      .setPosition(0, -23);
 
     // set size vars
     var set_spr_header = 50;
@@ -504,26 +679,38 @@ hiddencloud.Modules.ReadBookText = function(gameObj, current_game, text_question
       .setAlign("left").setFontFamily('Open Sans');
 
     var scroller = new lime.ui.Scroller().setDirection(lime.ui.Scroller.Direction.VERTICAL);
-    scroller.setFill('#B1B1B1');
-    scroller.setSize(set_scroller_width, set_scroller_height);
-    scroller.setAnchorPoint(0, 0);
-    scroller.setPosition(set_scroller_pos_w, set_spr_header);
-    scroller.appendChild(lbl_text_here);
-    scroller.scrollTo(0);
+        scroller.setFill('#B1B1B1');
+        scroller.setSize(set_scroller_width, set_scroller_height);
+        scroller.setAnchorPoint(0, 0);
+        scroller.setPosition(set_scroller_pos_w, set_spr_header);
+        scroller.appendChild(bg_highlight_line);
+        scroller.appendChild(lbl_text_here);
+        scroller.scrollTo(0);
 
     var btn_width_ratio = gameObj.width/1.3;
+    var btn_side_width = (gameObj.width - btn_width_ratio)/2;
     var btn_starting = gameObj.height-100;
     var btn_height = 50;
     var btn_padding = 10;
 
-    var btn_read = new hiddencloud.Button().setColor('#B0171F').setSize(btn_width_ratio, btn_height).setAnchorPoint(0,0)
+    var btn_read = new hiddencloud.Button().setColor('#B0171F').setSize(btn_width_ratio-(btn_padding*4), btn_height).setAnchorPoint(0,0)
       .setPosition(gameObj.width/2, btn_starting+((btn_height + btn_padding)*1))
       .setText("FINISHED READING").setFontSize(15);
+
+    var btn_decrease = new hiddencloud.Button().setColor('#B0171F').setSize(btn_side_width, btn_height).setAnchorPoint(0,0)
+      .setPosition((btn_side_width/2)+btn_padding, btn_starting+((btn_height + btn_padding)*1))
+      .setText("-").setFontSize(15);
+
+    var btn_increase = new hiddencloud.Button().setColor('#B0171F').setSize(btn_side_width, btn_height).setAnchorPoint(0,0)
+      .setPosition(gameObj.width-(btn_side_width/2)-btn_padding, btn_starting+((btn_height + btn_padding)*1))
+      .setText("+").setFontSize(15);
 
     layer_read_and_answer.appendChild(bg_read_and_answer);
     layer_read_and_answer.appendChild(lbl_book_title);
     layer_read_and_answer.appendChild(scroller);
     layer_read_and_answer.appendChild(btn_read);
+    layer_read_and_answer.appendChild(btn_decrease);
+    layer_read_and_answer.appendChild(btn_increase);
     scene_read_and_answer.appendChild(layer_read_and_answer);
 
     hiddencloud.director.replaceScene(scene_read_and_answer);
@@ -555,6 +742,79 @@ hiddencloud.Modules.ReadBookText = function(gameObj, current_game, text_question
         current_game.current_reading_time = current_reading_time;
       }
     }, current_game.current_reading_time, dt);
+
+    var move_line;
+    // var dt2 = 1000;
+    var dt2 = current_game.current_speed;
+
+    var difference_per_level = 20;
+
+    if(current_game.difficulty == 1) {
+      dt2 -= (difference_per_level*1);
+    }
+    if(current_game.difficulty == 2) {
+      dt2 -= (difference_per_level*2);
+    }
+    if(current_game.difficulty == 3) {
+      dt2 -= (difference_per_level*3);
+    }
+    if(current_game.difficulty == 4) {
+      dt2 -= (difference_per_level*4);
+    }
+    if(current_game.difficulty == 5) {
+      dt2 -= (difference_per_level*5);
+    }
+    if(current_game.difficulty == 6) {
+      dt2 -= (difference_per_level*6);
+    }
+    if(current_game.difficulty == 7) {
+      dt2 -= (difference_per_level*7);
+    }
+    if(current_game.difficulty == 8) {
+      dt2 -= (difference_per_level*8);
+    }
+    if(current_game.difficulty == 9) {
+      dt2 -= (difference_per_level*9);
+    }
+
+    current_game.current_speed = dt2;
+
+    lime.scheduleManager.scheduleWithDelay(move_line=function() {
+      var pos = this.getPosition();
+          pos.y += 16;
+      this.setPosition(pos);
+    }, bg_highlight_line, dt2);
+
+    var speed_var = 120;
+
+    goog.events.listen(btn_decrease, ['mousedown', 'touchstart'], decreaseSpeedFunction = function(e) {
+      if (dt2 >= 0) {
+        dt2 = dt2 + speed_var;
+        current_game.current_speed = dt2;
+        console.log("decreased speed to " + dt2);
+        lime.scheduleManager.unschedule(move_line, bg_highlight_line);
+        lime.scheduleManager.scheduleWithDelay(move_line, bg_highlight_line, dt2);
+      }
+      else {
+        dt2 = 0;
+        console.log("decreased speed to " + dt2);
+        lime.scheduleManager.unschedule(move_line, bg_highlight_line);
+        lime.scheduleManager.scheduleWithDelay(move_line, bg_highlight_line, dt2);
+      }
+    });
+
+    goog.events.listen(btn_increase, ['mousedown', 'touchstart'], increaseSpeedFunction = function(e) {
+      if (dt2 >= 0) {
+        dt2 = dt2 - speed_var;
+        console.log("increased speed to " + dt2);
+        lime.scheduleManager.unschedule(move_line, bg_highlight_line);
+        lime.scheduleManager.scheduleWithDelay(move_line, bg_highlight_line, dt2);
+      }
+      if (dt2 <= 0) {
+        dt2 = 0;
+      }
+      current_game.current_speed = dt2;
+    });
 
     // when clicked finished reading
     goog.events.listen(btn_read, ['mousedown', 'touchstart'], function(e) {
@@ -661,18 +921,18 @@ hiddencloud.Modules.AnswerBookTextQuestion = function(gameObj, current_game, boo
 
   var btn_choice1 = new hiddencloud.Button().setColor(btn_color).setSize(btn_width_ratio, btn_height).setAnchorPoint(0,0)
     .setPosition(gameObj.width/2, btn_starting+((btn_height + btn_padding)*1))
-    .setText("CHOICE 1").setFontSize(13);
-    // .setLabelSize(btn_width_ratio, btn_height);
+    .setText("CHOICE 1").setFontSize(13)
+    .setLabelWidth(btn_width_ratio);
 
   var btn_choice2 = new hiddencloud.Button().setColor(btn_color).setSize(btn_width_ratio, btn_height).setAnchorPoint(0,0)
     .setPosition(gameObj.width/2, btn_starting+((btn_height + btn_padding)*2))
-    .setText("CHOICE 2").setFontSize(13);
-    // .setLabelSize(btn_width_ratio, btn_height);
+    .setText("CHOICE 2").setFontSize(13)
+    .setLabelWidth(btn_width_ratio);
 
   var btn_choice3 = new hiddencloud.Button().setColor(btn_color).setSize(btn_width_ratio, btn_height).setAnchorPoint(0,0)
     .setPosition(gameObj.width/2, btn_starting+((btn_height + btn_padding)*3))
-    .setText("CHOICE 3").setFontSize(13);
-    // .setLabelSize(btn_width_ratio, btn_height);
+    .setText("CHOICE 3").setFontSize(13)
+    .setLabelWidth(btn_width_ratio);
 
   layer_answer_btq.appendChild(bg_answer_btq);
   layer_answer_btq.appendChild(scroller);
@@ -696,7 +956,7 @@ hiddencloud.Modules.startMovingBall = function(gameObj, current_game, average_wp
     .setFill('#CCCCCC').setPosition(0, 0).setAnchorPoint(0, 0);
 
   var lbl_instructions = new lime.Label()
-    .setText("Follow the ball with your eyes." + "\r\nSpeed: " + average_wpm + " WPM")
+    .setText("Don't move your head. Just follow the ball with your eyes.")
     .setSize(gameObj.width, 50)
     .setMultiline(true)
     .setAlign("center")
@@ -707,18 +967,15 @@ hiddencloud.Modules.startMovingBall = function(gameObj, current_game, average_wp
   var pos_x_max = gameObj.width;
   var pos_y_max = gameObj.height;
   var ball_radius = 20;
-  var padding = 20;
+  var padding = 15;
   var position = [];
 
   var red_ball = new lime.Circle().setSize(ball_radius, ball_radius)
       .setFill('#B0171F').setPosition(gameObj.width/2, gameObj.height/2);
 
-  if (current_game.difficulty > 5) {
-    red_ball.setFill('#BEBEBE');
-  }
-  if (current_game.difficulty > 8) {
-    red_ball.setFill('#DCDCDC');
-  }
+  position.push([gameObj.width/2, gameObj.height/2]);
+  position.push([gameObj.width/2, gameObj.height/2]);
+  position.push([gameObj.width/2, gameObj.height/2]);
 
   for (var i = 0; i < 2; i++) {
     position.push([0+padding, 0+padding]);
@@ -730,7 +987,7 @@ hiddencloud.Modules.startMovingBall = function(gameObj, current_game, average_wp
     if(pos_y+padding < pos_y_max) {
       position.push([pos_x+padding, pos_y+padding]);
       position.push([pos_x_max-padding, pos_y+padding]);
-      pos_y += ball_radius;
+      pos_y += ball_radius+10;
     }
   }
   for (var i = 0; i < 2; i++) {
@@ -739,26 +996,39 @@ hiddencloud.Modules.startMovingBall = function(gameObj, current_game, average_wp
     position.push([0+padding, pos_y_max-padding]);
     position.push([pos_x_max-padding, pos_y_max-padding]);
   }
-  pos_x = 0;
-  pos_y = 0;
-  for (var i = 0; i < 50; i++) {
-    if(pos_x+padding < pos_x_max) {
-      position.push([pos_x+padding, pos_y+padding]);
-      position.push([pos_x+padding, pos_y_max-padding]);
-      pos_x += ball_radius*2;
-    }
-  }
-  for (var i = 0; i < 2; i++) {
-    position.push([0+padding, 0+padding]);
-    position.push([pos_x_max-padding, 0+padding]);
-    position.push([0+padding, pos_y_max-padding]);
-    position.push([pos_x_max-padding, pos_y_max-padding]);
-  }
+  // pos_x = 0;
+  // pos_y = 0;
+  // for (var i = 0; i < 50; i++) {
+  //   if(pos_x+padding < pos_x_max) {
+  //     position.push([pos_x+padding, pos_y+padding]);
+  //     position.push([pos_x+padding, pos_y_max-padding]);
+  //     pos_x += ball_radius*2;
+  //   }
+  // }
+  // for (var i = 0; i < 2; i++) {
+  //   position.push([0+padding, 0+padding]);
+  //   position.push([pos_x_max-padding, 0+padding]);
+  //   position.push([0+padding, pos_y_max-padding]);
+  //   position.push([pos_x_max-padding, pos_y_max-padding]);
+  // }
   position.push([gameObj.width/2, gameObj.height/2]);
 
   // var words_per_line = 15;
   // var dt = 500;
   var dt = hiddencloud.Functions.getMovingBallDT(average_wpm); // range = 600 - 350
+
+  if (current_game.difficulty > 2) {
+    red_ball.setFill('#8c0000');
+    dt = 750;
+  }
+  if (current_game.difficulty > 5) {
+    red_ball.setFill('#985F5F');
+    dt = 500;
+  }
+  if (current_game.difficulty > 8) {
+    red_ball.setFill('#9C9C9C');
+    dt = 350;
+  }
 
   // console.log("average_wpm: " + average_wpm);
   // console.log("dt: " + dt);
@@ -776,8 +1046,8 @@ hiddencloud.Modules.startMovingBall = function(gameObj, current_game, average_wp
   }, red_ball, dt);
 
   layer_moving_ball.appendChild(bg_moving_ball);
-  layer_moving_ball.appendChild(lbl_instructions);
   layer_moving_ball.appendChild(red_ball);
+  layer_moving_ball.appendChild(lbl_instructions);
   scene_moving_ball.appendChild(layer_moving_ball);
 
   hiddencloud.director.pushScene(scene_moving_ball);
@@ -815,16 +1085,36 @@ hiddencloud.Modules.startRapidSerialVisualPresentation = function(gameObj, curre
     .setPosition(gameObj.width/2, (gameObj.height/2)-((gameObj.height/10)/1))
     .setAlign("center");
 
+  var btn_padding = 10;
+  var btn_width_ratio = (gameObj.width/2)-(btn_padding*1.5);
+  var btn_starting = gameObj.height-100;
+  var btn_height = 50;
+
+  var btn_decrease = new hiddencloud.Button().setColor('#B0171F').setSize(btn_width_ratio, btn_height).setAnchorPoint(0,0)
+    .setPosition((btn_width_ratio/2)+(btn_padding*1), btn_starting+((btn_height + btn_padding)*1))
+    .setText("DECREASE SPEED (-)").setFontSize(15);
+
+  var btn_increase = new hiddencloud.Button().setColor('#B0171F').setSize(btn_width_ratio, btn_height).setAnchorPoint(0,0)
+    .setPosition(((btn_width_ratio*3)/2)+(btn_padding*2), btn_starting+((btn_height + btn_padding)*1))
+    .setText("INCREASE SPEED (+)").setFontSize(15);
+
   var moving_text = chosen_b_t.text.match(/\S+/g);
   lbl_big_text.setText(moving_text[0]);
 
+  var ball_radius = 20;
+  var ball = new lime.Circle().setSize(ball_radius, ball_radius)
+      .setFill('#9C9C9C').setPosition(gameObj.width/2, (gameObj.height/2)-(ball_radius/1));
+
   layer_rsvp.appendChild(bg_rsvp);
+  layer_rsvp.appendChild(ball);
   layer_rsvp.appendChild(lbl_big_text);
+  layer_rsvp.appendChild(btn_decrease);
+  layer_rsvp.appendChild(btn_increase);
   scene_rsvp.appendChild(layer_rsvp);
 
   hiddencloud.director.replaceScene(scene_rsvp);
 
-  var displayTextFunction;
+  var displayTextFunction, decreaseSpeedFunction, increaseSpeedFunction;
   var dt = 200;
   lime.scheduleManager.scheduleWithDelay(displayTextFunction = function() {
     if(moving_text.length > 0)
@@ -842,6 +1132,24 @@ hiddencloud.Modules.startRapidSerialVisualPresentation = function(gameObj, curre
       hiddencloud.Modules.AnswerBookTextQuestion(gameObj, current_game, chosen_b_t, chosen_q_and_c);
     }
   }, lbl_big_text, dt);
+
+  goog.events.listen(btn_decrease, ['mousedown', 'touchstart'], decreaseSpeedFunction = function(e) {
+    if (dt >= 0) {
+      dt = dt + 50;
+      console.log("decreased speed to " + dt);
+      lime.scheduleManager.unschedule(displayTextFunction, lbl_big_text);
+      lime.scheduleManager.scheduleWithDelay(displayTextFunction, lbl_big_text, dt);
+    }
+  });
+
+  goog.events.listen(btn_increase, ['mousedown', 'touchstart'], increaseSpeedFunction = function(e) {
+    if (dt >= 0) {
+      dt = dt - 50;
+      console.log("increased speed to " + dt);
+      lime.scheduleManager.unschedule(displayTextFunction, lbl_big_text);
+      lime.scheduleManager.scheduleWithDelay(displayTextFunction, lbl_big_text, dt);
+    }
+  });
 }
 
 hiddencloud.Modules.endOfQuiz = function(gameObj, current_game) {
@@ -865,10 +1173,11 @@ hiddencloud.Modules.endOfQuiz = function(gameObj, current_game) {
 
   var awpm_here = Math.round(hiddencloud.Functions.getWPM(current_game, 0, 9));
   var rc_here = hiddencloud.Functions.getReadingComprehension(current_game.choices);
+  var e_awpm = Math.round(awpm_here * (rc_here/100));
   var score_here = hiddencloud.Functions.getScore(current_game, current_game.difficulty-1);
-  var tweet_text = "Tweet Results:\r\nI can read " + awpm_here + " WPM and have an average " + rc_here + "% comprehension! Test your speed now! #hiddencloudacademy http://j.mp/hiddencloud";
+  var tweet_text = "Tweet Results:\r\nI can read as fast as " + e_awpm + " WPM! Test your speed now! #hiddencloudacademy http://j.mp/hiddencloud";
   var random_book = hiddencloud.Functions.getRandomBookData();
-  var random_book_mins = random_book.total_words / awpm_here;
+  var random_book_mins = random_book.total_words / e_awpm;
   // var random_book_mins = random_book.total_words / 600;
   var in_hours = Math.floor(random_book_mins/60);
   var in_minutes = Math.round(random_book_mins%60);
@@ -879,20 +1188,24 @@ hiddencloud.Modules.endOfQuiz = function(gameObj, current_game) {
     "average_wpm": awpm_here,
     "average_rc": rc_here,
     "total_correct": correct_here,
-    "quiz_score": score_here
+    "quiz_score": score_here,
+    "b_awpm": current_game.benchmark_speed
   });
 
-  console.log(random_book_mins);
-  console.log(in_hours);
-  console.log(in_minutes);
   game_result.save();
-  console.log(game_result);
+  hca_functions.send_game_result(game_result);
+
+  // console.log(random_book_mins);
+  // console.log(in_hours);
+  // console.log(in_minutes);
+  // console.log(game_result);
   // send results to server
 
   var lbl_quote = new lime.Label().setSize(gameObj.width, 60)
-    .setText("You can read " + random_book.title + " in " + in_hours + " hours and " + in_minutes + " minutes.")
+    .setText("With that speed, you can read " + random_book.title + " in " + in_hours + " hours and " + in_minutes + " minutes.")
     .setPosition(0, 20).setAnchorPoint(0, 0)
-    .setFontColor("#ffffff");
+    .setFontColor("#ffffff")
+    .setFontSize(13);
 
   var set_starting_point_y = 0;
   var set_lbl_height = 30;
@@ -926,15 +1239,15 @@ hiddencloud.Modules.endOfQuiz = function(gameObj, current_game) {
     .setFontColor("#ffffff").setFontFamily(gameObj.ui.font_family)
     .setAlign("left");
 
-  var lbl_total_score = new lime.Label().setSize(gameObj.width, set_lbl_height)
+  var lbl_total_coins = new lime.Label().setSize(gameObj.width, set_lbl_height)
     .setPosition(set_lbl_padding_x, set_lbl_padding_y+(set_lbl_height*5)+set_starting_point_y).setAnchorPoint(0, 0)
-    .setText("TOTAL SCORE: " + score_here).setFontSize(15)
+    .setText("EFFICIENT SPEED: " + e_awpm + " WPM").setFontSize(15)
     .setFontColor("#ffffff").setFontFamily(gameObj.ui.font_family)
     .setAlign("left");
 
-  var lbl_total_coins = new lime.Label().setSize(gameObj.width, set_lbl_height)
+  var lbl_total_score = new lime.Label().setSize(gameObj.width, set_lbl_height)
     .setPosition(set_lbl_padding_x, set_lbl_padding_y+(set_lbl_height*6)+set_starting_point_y).setAnchorPoint(0, 0)
-    .setText("TOTAL COINS: " + hiddencloud.Functions.getTotalCoins(score_here)).setFontSize(15)
+    .setText("TOTAL SCORE: " + score_here).setFontSize(15)
     .setFontColor("#ffffff").setFontFamily(gameObj.ui.font_family)
     .setAlign("left");
 
@@ -964,33 +1277,35 @@ hiddencloud.Modules.endOfQuiz = function(gameObj, current_game) {
   var bg_line = new lime.Sprite().setSize(gameObj.width, l_size).setAnchorPoint(0,0)
     .setFill("#141414").setPosition(0, c_size/2);
 
+  var btn_normal_var = "#252525";
+
   // #138113
   var e1 = new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
-    .setFill("#138113").setPosition((c_size+c_padding)*1,0);
+    .setFill(btn_normal_var).setPosition((c_size+c_padding)*1,0);
   var e2 = new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
-    .setFill("#138113").setPosition((c_size+c_padding)*2,0);
+    .setFill(btn_normal_var).setPosition((c_size+c_padding)*2,0);
   var e3 = new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
-    .setFill("#138113").setPosition((c_size+c_padding)*3,0);
+    .setFill(btn_normal_var).setPosition((c_size+c_padding)*3,0);
 
   // #DDDD00
   var m1 = new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
-    .setFill("#DDDD00").setPosition((c_size+c_padding)*5,0);
+    .setFill(btn_normal_var).setPosition((c_size+c_padding)*5,0);
   var m2 = new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
-    .setFill("#DDDD00").setPosition((c_size+c_padding)*6,0);
+    .setFill(btn_normal_var).setPosition((c_size+c_padding)*6,0);
   var m3 = new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
-    .setFill("#DDDD00").setPosition((c_size+c_padding)*7,0);
+    .setFill(btn_normal_var).setPosition((c_size+c_padding)*7,0);
 
   // #8c0000
   var h1 = new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
-    .setFill("#8c0000").setPosition((c_size+c_padding)*9,0);
+    .setFill(btn_normal_var).setPosition((c_size+c_padding)*9,0);
   var h2 = new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
-    .setFill("#8c0000").setPosition((c_size+c_padding)*10,0);
+    .setFill(btn_normal_var).setPosition((c_size+c_padding)*10,0);
   var h3 = new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
-    .setFill("#8c0000").setPosition((c_size+c_padding)*11,0);
+    .setFill(btn_normal_var).setPosition((c_size+c_padding)*11,0);
 
   // #3f3f3f
   var x1 = new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
-    .setFill("#4b4b4b").setPosition((c_size+c_padding)*13,0);
+    .setFill(btn_normal_var).setPosition((c_size+c_padding)*13,0);
 
   var btn_start_pos = 130;
   var btn_height = 40;
@@ -1040,20 +1355,111 @@ hiddencloud.Modules.endOfQuiz = function(gameObj, current_game) {
   scene_end_of_quiz.appendChild(layer_results);
   scene_end_of_quiz.appendChild(layer_difficulty);
 
+  // load color on current difficulty 
+  var color_current = "#4b4b4b";
+  switch(current_game.difficulty) {
+    case 11:
+    case 10:
+      if(current_game.difficulty == 10) {
+        x1.setFill(color_current);
+      }
+      if(current_game.choices[9] == 1) {
+        layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
+          .setFill("#3f3f3f").setPosition((c_size+c_padding)*13,0));
+      }
+    case 9:
+      if(current_game.difficulty == 9) {
+        h3.setFill(color_current);
+      }
+      if(current_game.choices[8] == 1) {
+        layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
+          .setFill("#8c0000").setPosition((c_size+c_padding)*11,0));
+      }
+    case 8:
+      if(current_game.difficulty == 8) {
+        h2.setFill(color_current);
+      }
+      if(current_game.choices[7] == 1) {
+        layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
+          .setFill("#8c0000").setPosition((c_size+c_padding)*10,0));
+      }
+    case 7:
+      if(current_game.difficulty == 7) {
+        h1.setFill(color_current);
+      }
+      if(current_game.choices[6] == 1) {
+        layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
+          .setFill("#8c0000").setPosition((c_size+c_padding)*9,0));
+      }
+    case 6:
+      if(current_game.difficulty == 6) {
+        m3.setFill(color_current);
+      }
+      if(current_game.choices[5] == 1) {
+        layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
+          .setFill("#DDDD00").setPosition((c_size+c_padding)*7,0));
+      }
+    case 5:
+      if(current_game.difficulty == 5) {
+        m2.setFill(color_current);
+      }
+      if(current_game.choices[4] == 1) {
+        layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
+          .setFill("#DDDD00").setPosition((c_size+c_padding)*6,0));
+      }
+    case 4:
+      if(current_game.difficulty == 4) {
+        m1.setFill(color_current);
+      }
+      if(current_game.choices[3] == 1) {
+        layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
+          .setFill("#DDDD00").setPosition((c_size+c_padding)*5,0));
+      }
+    case 3:
+      if(current_game.difficulty == 3) {
+        e3.setFill(color_current);
+      }
+      if(current_game.choices[2] == 1) {
+        layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
+          .setFill("#138113").setPosition((c_size+c_padding)*3,0));
+      }
+    case 2:
+      if(current_game.difficulty == 2) {
+        e2.setFill(color_current);
+      }
+      if(current_game.choices[1] == 1) {
+        layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
+          .setFill("#138113").setPosition((c_size+c_padding)*2,0));
+      }
+    case 1:
+      if(current_game.difficulty == 1) {
+        e1.setFill(color_current);
+      }
+      if(current_game.choices[0] == 1) {
+        layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
+          .setFill("#138113").setPosition((c_size+c_padding)*1,0));
+      }
+  }
+
   hiddencloud.director.replaceScene(scene_end_of_quiz);
 
   goog.events.listen(btn_tweet_text, ['mousedown', 'touchstart'], function(e) {
     gameObj.ui.click_button_au.play();
-    hiddencloud.Functions.tweetScore(current_game, awpm_here, rc_here);
+    window.answer_survey(current_game.benchmark_speed, awpm_here, rc_here);
+    hiddencloud.Functions.tweetScore(e_awpm);
   });
   goog.events.listen(btn_menu_selection, ['mousedown', 'touchstart'], function(e) {
     gameObj.ui.click_button_au.play();
+    window.answer_survey(current_game.benchmark_speed, awpm_here, rc_here);
     hiddencloud.Modules.MenuSelection(gameObj);
   });
   goog.events.listen(btn_view_progress, ['mousedown', 'touchstart'], function(e) {
     gameObj.ui.click_button_au.play();
+    window.answer_survey(current_game.benchmark_speed, awpm_here, rc_here);
+    window.open("./progress.html","_blank");
     // hiddencloud.Modules.MenuSelection(gameObj);
   });
+
 
 }
 

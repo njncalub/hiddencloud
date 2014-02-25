@@ -176,10 +176,55 @@ window.hca_functions = (function() {
   }
 
   hca_functions.send_game_result = function(result) {
-    var rdata = {
-      "uid": 
 
-    };
+    if (Player.count() > 0) {
+      var rdata = {
+        "uid": Player.last().id,
+        "training_date": result.training_date,
+        "average_wpm": result.average_wpm,
+        "average_rc": result.average_rc,
+        "total_correct": result.total_correct,
+        "quiz_score": result.quiz_score,
+        "b_awpm": result.b_awpm
+      };
+
+      var game_result_uri = "http://hiddencloud.pythonanywhere.com/api/v1/game_result/" + "?" + hca_functions.auth_key;
+
+      hca_functions.jax(game_result_uri, 'POST', rdata).done(function(data) {
+        console.log("POST game result");
+      });
+    }
+  }
+
+  hca_functions.send_survey = function(survey) {
+
+    if (Player.count() > 0) {
+      var sdata = {
+        "uid": survey.uid,
+        "survey_date": survey.survey_date,
+        "q_enjoy_reading": survey.q_enjoy_reading,
+        "q_want_to_improve": survey.q_want_to_improve,
+        "q_like_visuals": survey.q_like_visuals,
+        "q_like_music": survey.q_like_music,
+        "q_like_story": survey.q_like_story,
+        "q_continue_playing": survey.q_continue_playing,
+        "q_find_way_easily": survey.q_find_way_easily,
+        "q_gets_difficult": survey.q_gets_difficult,
+        "q_good_rewards": survey.q_good_rewards,
+        "q_relevant_feedback": survey.q_relevant_feedback,
+        "q_game_helped": survey.q_game_helped,
+        "q_recommend_to_friends": survey.q_recommend_to_friends,
+        "b_awpm": survey.b_awpm,
+        "s_awpm": survey.s_awpm,
+        "s_rc": survey.s_rc
+      };
+
+      var survey_uri = "http://hiddencloud.pythonanywhere.com/api/v1/survey/" + "?" + hca_functions.auth_key;
+
+      hca_functions.jax(survey_uri, 'POST', sdata).done(function(data) {
+        console.log("POST survey");
+      });
+    }
   }
 
   return hca_functions;

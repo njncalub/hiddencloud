@@ -116,10 +116,14 @@ hiddencloud.Functions.getRandomBookTextAndQuestion = function(gameObj, current_g
   var book_text_questions = [];
   var book_text_question_uri = "http://hiddencloud.pythonanywhere.com/api/v1/book_text_question/?format=json&" + hca_functions.auth_key;
 
-  var ea_wpm = 150;
-  var me_wpm = 200;
-  var ha_wpm = 250;
-  var ex_wpm = 300;
+  // var ea_wpm = 150;
+  // var me_wpm = 200;
+  // var ha_wpm = 250;
+  // var ex_wpm = 300;
+  var ea_wpm = 200;
+  var me_wpm = 300;
+  var ha_wpm = 400;
+  var ex_wpm = 500;
   var tw_gte = 0;
   var tw_lte = 0;
   var s_difficulty = "";
@@ -152,7 +156,8 @@ hiddencloud.Functions.getRandomBookTextAndQuestion = function(gameObj, current_g
 
   book_text_question_uri = book_text_question_uri + "&from_book_text__from_book__genre__slug=" + selected_genre.slug;
   book_text_question_uri = book_text_question_uri + "&limit=" + 0;
-  // book_text_question_uri = book_text_question_uri + "&from_book_text__otal_words__gte=" + tw_gte;
+  // below lines add gte and lte
+  // book_text_question_uri = book_text_question_uri + "&from_book_text__total_words__gte=" + tw_gte;
   // book_text_question_uri = book_text_question_uri + "&from_book_text__total_words__lte=" + tw_lte;
 
   // console.log("chosen uri:");
@@ -364,10 +369,12 @@ hiddencloud.Functions.randomizeBookChoicesButton = function(gameObj, current_gam
 
   goog.events.listen(btn_choice1, ['mousedown', 'touchstart'], function(e) {
     if (correct_choice == 1) {
+      gameObj.ui.correct_au.play();
       console.log("correct answer!");
       current_game.choices.push(1);
     }
     else {
+      gameObj.ui.wrong_au.play();
       console.log("wrong answer!");
       current_game.choices.push(0);
     }
@@ -378,10 +385,12 @@ hiddencloud.Functions.randomizeBookChoicesButton = function(gameObj, current_gam
 
   goog.events.listen(btn_choice2, ['mousedown', 'touchstart'], function(e) {
     if (correct_choice == 2) {
+      gameObj.ui.correct_au.play();
       console.log("correct answer!");
       current_game.choices.push(1);
     }
     else {
+      gameObj.ui.wrong_au.play();
       console.log("wrong answer!");
       current_game.choices.push(0);
     }
@@ -391,16 +400,26 @@ hiddencloud.Functions.randomizeBookChoicesButton = function(gameObj, current_gam
 
   goog.events.listen(btn_choice3, ['mousedown', 'touchstart'], function(e) {
     if (correct_choice == 3) {
+      gameObj.ui.correct_au.play();
       console.log("correct answer!");
       current_game.choices.push(1);
     }
     else {
+      gameObj.ui.wrong_au.play();
       console.log("wrong answer!");
       current_game.choices.push(0);
     }
     hiddencloud.Modules.ChooseGenre(gameObj, current_game);
     // hiddencloud.Modules.ChooseGenre(gameObj, current_game);
   });
+}
+
+hiddencloud.Functions.getBenchmarkWPM = function(current_game, total_words, total_time) {
+  var wpm = 0;
+
+  wpm += Math.round(total_words/(total_time/60));
+
+  return wpm;
 }
 
 hiddencloud.Functions.getWPM = function(current_game, start_i, end_i) {
@@ -453,9 +472,9 @@ hiddencloud.Functions.getTotalCoins = function(total_score) {
   return coins;
 }
 
-hiddencloud.Functions.tweetScore = function(current_game, awpm, rc) {
+hiddencloud.Functions.tweetScore = function(e_awpm) {
 
-  var url = "https://twitter.com/intent/tweet?source=webclient&text=I%20can%20read%20" + awpm +"%20WPM%20and%20have%20an%20average%20" + rc + "%25%20comprehension!%20Test%20your%20speed%20now!%20%23hiddencloudacademy%20http%3A%2F%2Fj.mp/hiddencloud";
+  var url = "https://twitter.com/intent/tweet?source=webclient&text=I%20can%20read%20as%20fast%20as%20" + e_awpm +"%20WPM!%20Test%20your%20speed%20now!%20%23hiddencloudacademy%20http%3A%2F%2Fj.mp/hiddencloud";
 
   var win=window.open(url, '_blank');
   win.focus();
@@ -471,6 +490,11 @@ hiddencloud.Functions.getRandomBookData = function() {
   books.push({"title":"Harry Potter and the Order of the Phoenix","total_words":257045});
   books.push({"title":"Harry Potter and the Half-Blood Prince","total_words":168923});
   books.push({"title":"Harry Potter and the Deathly Hallows","total_words":198227});
+  // books.push({"title":"The Little Prince","total_words":});
+  // books.push({"title":"","total_words":});
+  // books.push({"title":"","total_words":});
+  // books.push({"title":"","total_words":});
+  // books.push({"title":"","total_words":});
   // books.push({"title":"","total_words":});
 
   books = hiddencloud.Functions.shuffleArray(books);

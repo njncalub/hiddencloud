@@ -26,7 +26,9 @@ goog.inherits(hiddencloud.Button, lime.GlossyButton);
 hiddencloud.Button.prototype.makeState_ = function() {
     var state = new lime.RoundedRect().setFill('#8c0000').setRadius(15);
     state.inner = new lime.RoundedRect().setRadius(15);
-    state.label = new lime.Label().setAlign('center').setFontColor('#eef').setFontSize(20).setSize(250, 20);
+    state.label = new lime.Label().setAlign('center')
+        .setFontColor('#eef').setFontSize(20)
+        .setSize(250, 20);
 
     state.appendChild(state.inner);
     state.inner.appendChild(state.label);
@@ -66,10 +68,10 @@ hiddencloud.Button.prototype.setFontSize = function(num) {
     return this;
 };
 
-hiddencloud.Button.prototype.setLabelSize = function(w, h) {
-    var padding = 10;
-    this.upstate.label.setSize(w-padding, h-padding)
-    this.downstate.label.setFill(w-padding, h-padding);
+hiddencloud.Button.prototype.setLabelWidth = function(w) {
+    var padding = 20;
+    this.upstate.label.setSize(w-padding, 20);
+    this.downstate.label.setSize(w-padding, 20);
     return this;
 };
 

@@ -238,3 +238,26 @@ footer .container {
   text-align: center;
   color: #FFF;
 }
+
+#about-page {
+  color: #ffffff;
+  font-weight: bold;  
+}
+
+.about-header {
+  font-size: 20px;
+  text-align: center;
+}
+
+.survey-form {
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-style:solid;
+  border: 1px dotted #ccc;
+}
+
+.survey-form > span {
+  font-size: 12px;
+  font-style: italic;
+}

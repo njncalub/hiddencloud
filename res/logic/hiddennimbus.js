@@ -22,7 +22,7 @@
   Player = Nimbus.Model.setup("Player", ["last_name", "first_name", "middle_name", "email_address", "gender", "cluster", "current_year", "department", "birth_date", "benchmark_speed", "benchmark_correct_items", "benchmark_wrong_items", "resource_uri"]);
   Book = Nimbus.Model.setup("Book", ["book_title", "book_content", "book_url", "date_created"]);
   Score = Nimbus.Model.setup("Score", ["score", "player", "date_created"]);
-  GameResult = Nimbus.Model.setup("GameResult", ["training_date", "average_wpm", "average_rc", "total_correct", "quiz_score"]);
+  GameResult = Nimbus.Model.setup("GameResult", ["training_date", "average_wpm", "average_rc", "total_correct", "quiz_score", "b_awpm"]);
   LogBook = Nimbus.Model.setup("LogBook", ["type", "date_created"]);
 
   $(function() {
@@ -314,6 +314,48 @@
     }
   }
 
+  window.view_progress = function() {
+    console.log("view_progress() called.");
+    window.open("./progress.html","_self");
+  }
+
+  window.answer_survey = function(benchmark_speed, awpm, rc) {
+    console.log("answer_survey() called.");
+    $('#surveyModal').modal({
+      keyboard: false,
+    });
+    window.survey = {};
+    window.survey.b_awpm = benchmark_speed;
+    window.survey.s_awpm = awpm;
+    window.survey.s_rc = rc;
+
+  }
+
+  window.save_survey = function() {
+    console.log("save_survey() called.");
+
+    window.survey.uid = Player.last().id;
+    window.survey.survey_date = new Date();
+    window.survey.q_enjoy_reading = $('#q-enjoy-reading input:checked').val();
+    window.survey.q_want_to_improve = $('#q-want-to-improve input:checked').val();
+    window.survey.q_like_visuals = $('#q-like-visuals input:checked').val();
+    window.survey.q_like_music = $('#q-like-music input:checked').val();
+    window.survey.q_like_story = $('#q-like-story input:checked').val();
+    window.survey.q_continue_playing = $('#q-continue-playing input:checked').val();
+    window.survey.q_find_way_easily = $('#q-find-way-easily input:checked').val();
+    window.survey.q_gets_difficult = $('#q-gets-difficult input:checked').val();
+    window.survey.q_good_rewards = $('#q-good-rewards input:checked').val();
+    window.survey.q_relevant_feedback = $('#q-relevant-feedback input:checked').val();
+    window.survey.q_game_helped = $('#q-game-helped input:checked').val();
+    window.survey.q_recommend_to_friends = $('#q-recommend-to-friends input:checked').val();
+
+    console.log(survey);
+    hca_functions.send_survey(survey);
+
+    $('#surveyModal').modal('hide');
+
+  }
+
   window.edit_profile = function() {
     console.log("edit_profile() called.");
     // Player.sync_all();
@@ -350,6 +392,8 @@
         }
       }
     }, 100);
+
+    load_cluster_department();
 
     // // check if has existing profile:
     // if (hca_functions.has_user_profile()) {

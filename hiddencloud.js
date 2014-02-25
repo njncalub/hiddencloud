@@ -56,6 +56,8 @@ hiddencloud.start = function() {
   gameObj.ui.bgm_01_au = new lime.audio.Audio("resources/audio/bgm/bgm_01.mp3");
   gameObj.ui.click_button_au = new lime.audio.Audio("resources/audio/ui/click.wav");
   gameObj.ui.select_category_au = new lime.audio.Audio("resources/audio/ui/select.wav");
+  gameObj.ui.correct_au = new lime.audio.Audio("resources/audio/ui/correct.wav");
+  gameObj.ui.wrong_au = new lime.audio.Audio("resources/audio/ui/wrong.wav");
 
   gameObj.player.coins = 100;
 
