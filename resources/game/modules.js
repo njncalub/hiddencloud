@@ -524,8 +524,10 @@ hiddencloud.Modules.startBenchmarkSpeed = function(gameObj, current_game) {
   lbl_book_title.setText("Read the following text normally to find your present reading level. Don't skip.");
 
   var benchmark_text = "To gauge your progress, you must first find your base speed. " +
+                       "DO NOT SKIP THIS PART. " + 
                        "Your base speed is the speed that you can read this passage of text with full comprehension. " + 
-                       "This is timed but please read this text at your normal pace." +
+                       "This is timed but please read this text at your normal pace. " +
+                       "To navigate, simply click and drag to scroll." +
                        "\r\n\r\n" +
                        "Most people have an average speed of 200 wpm (words per minute), which is also as fast as they can speak. " +
                        "Speed reading is a technique used by people around the world to read text more quickly by training the person's \"inner voice\". " + 
@@ -551,7 +553,8 @@ hiddencloud.Modules.startBenchmarkSpeed = function(gameObj, current_game) {
     .setSize(set_lbl_width, set_lbl_height)
     .setPosition(set_lbl_padding, set_lbl_padding).setAnchorPoint(0, 0)
     .setText(benchmark_text).setMultiline(true)
-    .setAlign("left").setFontFamily('Open Sans');
+    .setAlign("left").setFontFamily('Open Sans')
+    .setFontSize(15);
 
   var scroller = new lime.ui.Scroller().setDirection(lime.ui.Scroller.Direction.VERTICAL);
       scroller.setFill('#B1B1B1');
@@ -641,7 +644,21 @@ hiddencloud.Modules.ReadBookText = function(gameObj, current_game, text_question
   // console.log("total_words: ");
   // console.log(current_game.total_words);
 
-  if(current_game.difficulty == 10) {
+  console.log("current_game.difficulty");
+  console.log(current_game.difficulty);
+  if(current_game.difficulty == 3) {
+      // console.log("entering rsvp mode");
+      hiddencloud.Modules.startRapidSerialVisualPresentation(gameObj, current_game, chosen_b_t, chosen_q_and_c);
+  }
+  else if(current_game.difficulty == 6) {
+      // console.log("entering rsvp mode");
+      hiddencloud.Modules.startRapidSerialVisualPresentation(gameObj, current_game, chosen_b_t, chosen_q_and_c);
+  }
+  else if(current_game.difficulty == 9) {
+      // console.log("entering rsvp mode");
+      hiddencloud.Modules.startRapidSerialVisualPresentation(gameObj, current_game, chosen_b_t, chosen_q_and_c);
+  }
+  else if(current_game.difficulty == 10) {
       // console.log("entering rsvp mode");
       hiddencloud.Modules.startRapidSerialVisualPresentation(gameObj, current_game, chosen_b_t, chosen_q_and_c);
   }
@@ -1135,7 +1152,7 @@ hiddencloud.Modules.startRapidSerialVisualPresentation = function(gameObj, curre
 
   goog.events.listen(btn_decrease, ['mousedown', 'touchstart'], decreaseSpeedFunction = function(e) {
     if (dt >= 0) {
-      dt = dt + 50;
+      dt = dt + 30;
       console.log("decreased speed to " + dt);
       lime.scheduleManager.unschedule(displayTextFunction, lbl_big_text);
       lime.scheduleManager.scheduleWithDelay(displayTextFunction, lbl_big_text, dt);
@@ -1144,7 +1161,7 @@ hiddencloud.Modules.startRapidSerialVisualPresentation = function(gameObj, curre
 
   goog.events.listen(btn_increase, ['mousedown', 'touchstart'], increaseSpeedFunction = function(e) {
     if (dt >= 0) {
-      dt = dt - 50;
+      dt = dt - 30;
       console.log("increased speed to " + dt);
       lime.scheduleManager.unschedule(displayTextFunction, lbl_big_text);
       lime.scheduleManager.scheduleWithDelay(displayTextFunction, lbl_big_text, dt);
