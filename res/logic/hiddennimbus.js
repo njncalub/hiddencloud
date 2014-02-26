@@ -348,6 +348,10 @@
 
   }
 
+  window.refresh_progress = function() {
+    window.load_progress_data(GameResult.all());
+  }
+
   window.load_progress_data = function(results) {
     var training_date = null;
     var b_awpm = null;
@@ -358,6 +362,7 @@
     var quiz_score = null;
 
     var resultsContainer = document.getElementById('about-results');
+    $('#about-results').empty();
 
     resultsLoaded = true;
     var resultsList = document.createElement("ul");
