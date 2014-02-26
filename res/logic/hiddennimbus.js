@@ -319,6 +319,72 @@
     window.open("./progress.html","_self");
   }
 
+  window.load_progress = function() {
+    GameResult.sync_all();
+    console.log("load progress called");
+    
+
+    // while results == blank array
+    // wait
+
+    var started2 = Date.now();
+    var not_yet_found = true;
+    var interval2 = setInterval(function() {
+      if (Date.now() - started2 > 15000) {
+        clearInterval(interval2);
+      }
+      else {
+        GameResult.sync_all();
+        if (not_yet_found) {
+          console.log("not yet found");
+          if(GameResult.all().length != 0) {
+            var results = GameResult.all();
+            not_yet_found = false;
+            window.load_progress_data(results);
+          }
+        }
+      }
+    }, 1000);
+
+  }
+
+  window.load_progress_data = function(results) {
+    var training_date = null;
+    var b_awpm = null;
+    var average_wpm = null;
+    var average_rc = null;
+    var total_correct = null;
+    var e_awpm = null;
+    var quiz_score = null;
+
+    var resultsContainer = document.getElementById('about-results');
+
+    resultsLoaded = true;
+    var resultsList = document.createElement("ul");
+
+    for (var i = 0; i < results.length; i++) {
+      var resultsListItem = document.createElement("li");
+      var resultsLink = document.createElement("a");
+
+      training_date = results[i].training_date;
+      b_awpm = results[i].b_awpm;
+      average_wpm = results[i].average_wpm;
+      average_rc = results[i].average_rc;
+      total_correct = results[i].total_correct;
+      e_awpm = Math.round(average_wpm * (average_rc/100));
+      quiz_score = results[i].quiz_score;
+
+      resultsLink.href = "#";
+      resultsLink.innerText = (new Date(training_date)).toDateString() + ": Efficient Reading Speed - " + e_awpm + " WPM";
+      resultsListItem.className = 'results-li';
+
+      resultsListItem.appendChild(resultsLink);
+      resultsList.appendChild(resultsListItem);
+    }
+    resultsContainer.appendChild(resultsList);
+  }
+
+
   window.answer_survey = function(benchmark_speed, awpm, rc) {
     console.log("answer_survey() called.");
     $('#surveyModal').modal({
@@ -524,6 +590,8 @@
     // }
 
   }
+
+
 
   window.delete_book = function() {
     console.log("delete_book() called.");

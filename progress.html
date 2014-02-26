@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="res/css/sticky.css">
   <!-- <link rel="stylesheet" href="res/css/datepicker.css"> -->
 </head>
-<body onload="hiddencloud.start()">
+<body>
   <script type="text/javascript" src="res/js/jquery.js"></script>
 
   <div id="wrap">
@@ -74,7 +74,7 @@
                 <label for="first_name">First Name</label>
                 <input type="text" class="form-control" id="first_name" placeholder="">
               </div>
-              <div class="form-group">
+              <div class="form-group hide">
                 <label for="middle_name">Middle Name</label>
                 <input type="text" class="form-control" id="middle_name" placeholder="">
               </div>
@@ -250,7 +250,7 @@
                 <span>Strongly Agree</span>
               </div>
               <div class="form-group survey-form">
-                <label for="q-like-story">I like the story of the game.</label>
+                <label for="q-like-story">I like the use of speed reading mechanics in the game.</label>
                 <br />
                 <span>Strongly Disagree</span>
                 <div id="q-like-story" data-toggle-name="q-like-story" class="btn-group" data-toggle="buttons">
@@ -512,8 +512,8 @@
               </div>
               <div class="row">
                 <div class="container">
-                  <div class="about-results">
-                    <p>This is where you can see your results.</p>
+                  <div id="about-results">
+                    
                   </div>
                 </div>
               </div>
@@ -538,11 +538,13 @@
   <script type="text/javascript" src="res/logic/functions.js"></script>
   <script type="text/javascript" src="res/logic/multi.js"></script>
   <script type="text/javascript" src="res/logic/main.js"></script>
+  <script type="text/javascript" src="res/logic/gameprogress.js"></script>
+  <script type='text/javascript' src='res/js/knockout-3.0.0.js'></script>
+  <!-- 
   <script type="text/javascript" src="../closure/closure/goog/base.js"></script>
   <script type="text/javascript" src="hiddencloud.js"></script>
-  <!-- 
-  <script type="text/javascript" src="compiled/academy.js"></script>
    -->
+  <script type="text/javascript" src="compiled/academy.js"></script>
 
 </body>
 </html>
