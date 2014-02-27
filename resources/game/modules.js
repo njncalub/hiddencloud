@@ -533,26 +533,27 @@ hiddencloud.Modules.startBenchmarkSpeed = function(gameObj, current_game) {
                        "DO NOT SKIP THIS PART. " + 
                        "This is timed but please read this text at your normal pace. " +
                        "To gauge your progress, you must first find your base speed. " +
-                       "Your base speed is the speed that you can read this passage of text with full comprehension. " + 
+                       "This is the speed that you can read this passage of text with full comprehension. " + 
                        // "To navigate, simply click and drag to scroll." +
                        "\r\n\r\n" +
-                       "Most people have an average speed of 200 wpm (words per minute), which is also as fast as they can speak. " +
-                       "Speed reading is a technique used by people around the world to read text quickler by training the person's \"inner voice\". " + 
                        "When you read, you usually experience subvocalization where you vocalize each word in your head. " +
-                       // "This poses as a major problem in speed because it takes time to subvocalize each word and you can only read as fast as you speak." +
+                       "Speed reading is a technique used by people around the world to read text quicker by training the person's \"inner voice\". " + 
                        "\r\n\r\n" +
+                       "Most people have an average speed of 200 wpm (words per minute), which is also as fast as they can speak. " +
+                       // "This poses as a major problem in speed because it takes time to subvocalize each word and you can only read as fast as you speak." +
                        "However, by glancing at the words in just a few milliseconds, your head won't have time to subvocalize. " +
-                       "By silencing your inner voice, you can read at a much greater speed with better reading comprehension (through constant training). " +
+                       "Through constant training, you can read at a much greater speed with better reading comprehension. " +
                        // // "In the real world, you can speed read through methods like using a finger or pen to point and guide your eyes through each line of text at a speed faster than you can normally read. " +
                        // // "This works because the eye is very good at tracking movement. " + 
                        // "Even if at this point full reading comprehension is lost, it's exactly this method of training that will allow you to read faster." +
-                       // "\r\n\r\n" +
+                       "\r\n\r\n" +
                        // "This game uses Meta Guiding to speed up eye movement and intake of the Visual Cortex and uses Rapid Serial Visual Presentation (RSVP) to improve peripheral vision. " +
-                       "There are ten questions in total. " + 
+                       "This is a quiz type game and there are ten questions in total. " + 
                        // "Start by choosing a random genre for your passage. " + 
                        // "Try to speed read the lines as fast as you can by following the highlighted area. " + 
-                       "If it is too fast or too slow, you can adjust the speed through the (-) and (+) buttons. " +
-                       "To test your comprehension, you need to answer a related question afterwards." +
+                       "If the text is too fast or too slow, you can adjust the speed through the (-) and (+) buttons. " +
+                       "To test your comprehension, you need to answer a related question afterwards. " +
+                       "It may be hard at first, but don't give up." +
                        "\r\n\r\n" +
                        "Now click finish reading to start your training. Good luck!";
 
@@ -694,6 +695,8 @@ hiddencloud.Modules.ReadBookText = function(gameObj, current_game, text_question
     var scene_read_and_answer = new lime.Scene();
     var layer_read_and_answer = new lime.Layer().setPosition(0, 0)
       .setRenderer(gameObj.renderer).setAnchorPoint(0, 0);
+    var layer_read_and_answer2 = new lime.Layer().setPosition(0, 0)
+      .setRenderer(lime.Renderer.CANVAS).setAnchorPoint(0, 0);
     var bg_read_and_answer = new lime.Sprite().setSize(gameObj.width, gameObj.height)
       .setFill('#CCCCCC').setPosition(0, 0).setAnchorPoint(0, 0);
     var bg_highlight_line = new lime.Sprite().setSize(gameObj.width, 20)
@@ -709,7 +712,8 @@ hiddencloud.Modules.ReadBookText = function(gameObj, current_game, text_question
     var set_scroller_pos_w = (gameObj.width-set_scroller_width)/2;
     var set_lbl_padding = 10;
     var set_lbl_width = set_scroller_width-(set_lbl_padding*2);
-    var set_lbl_height = gameObj.height*5;
+    // var set_lbl_height = gameObj.height*5;
+    var set_lbl_height = 100;
 
     var lbl_book_title = new lime.Label()
       // .setSize(gameObj.width, set_spr_header)
@@ -723,12 +727,19 @@ hiddencloud.Modules.ReadBookText = function(gameObj, current_game, text_question
       .setText(text_question_object.from_book_text.text).setMultiline(true)
       .setAlign("left").setFontFamily('Open Sans');
 
+    var lbl_text_here2 = new lime.Label()
+      .setSize(set_lbl_width, gameObj.height*5)
+      .setPosition(set_lbl_padding, set_lbl_padding).setAnchorPoint(0, 0)
+      .setText("").setMultiline(true)
+      .setAlign("left").setFontFamily('Open Sans');
+
     var scroller = new lime.ui.Scroller().setDirection(lime.ui.Scroller.Direction.VERTICAL);
         scroller.setFill('#B1B1B1');
         scroller.setSize(set_scroller_width, set_scroller_height);
         scroller.setAnchorPoint(0, 0);
         scroller.setPosition(set_scroller_pos_w, set_spr_header);
         scroller.appendChild(bg_highlight_line);
+        scroller.appendChild(lbl_text_here2);
         scroller.appendChild(lbl_text_here);
         scroller.scrollTo(0);
 
@@ -757,6 +768,7 @@ hiddencloud.Modules.ReadBookText = function(gameObj, current_game, text_question
     layer_read_and_answer.appendChild(btn_decrease);
     layer_read_and_answer.appendChild(btn_increase);
     scene_read_and_answer.appendChild(layer_read_and_answer);
+    // scene_read_and_answer.appendChild(layer_read_and_answer2);
 
     hiddencloud.director.replaceScene(scene_read_and_answer);
 
@@ -826,9 +838,20 @@ hiddencloud.Modules.ReadBookText = function(gameObj, current_game, text_question
 
     lime.scheduleManager.scheduleWithDelay(move_line=function() {
       var pos = this.getPosition();
-          pos.y += 16;
-      this.setPosition(pos);
-      scroller.scrollTo(pos.y-50);
+      // console.log("lbl_text_here.measureText().height");
+      // console.log(lbl_text_here.measureText().height);
+      // console.log("pos.y");
+      // console.log(pos.y);
+
+      // if(pos.y < lbl_text_here.measureText().height) {
+        pos.y += 16;
+        this.setPosition(pos);
+        scroller.scrollTo(pos.y-50);
+      // }
+      // else {
+      //   console.log("finished reading");
+      // }
+
     }, bg_highlight_line, dt2);
 
     var speed_var = 120;
@@ -921,6 +944,9 @@ hiddencloud.Modules.ReadBookText = function(gameObj, current_game, text_question
     if (current_game.difficulty == 1) {
       window.read_instructions_guide();
     }
+
+    console.log("lbl_text_here.measureText()");
+    console.log(lbl_text_here.measureText());
   }
 }
 
@@ -1027,20 +1053,31 @@ hiddencloud.Modules.startMovingBall = function(gameObj, current_game, average_wp
   // position.push([gameObj.width/2, gameObj.height/2]);
   position.push([gameObj.width/2, gameObj.height/2]);
 
-  for (var i = 0; i < 2; i++) {
+  for (var i = 0; i < 1; i++) {
     position.push([0+padding, 0+padding]);
     position.push([pos_x_max-padding, 0+padding]);
     position.push([0+padding, pos_y_max-padding]);
     position.push([pos_x_max-padding, pos_y_max-padding]);
   }
+
+  var ball_jump = 50;
+
+  if(current_game.difficulty > 3) {
+    ball_jump = 30;
+  }
+  if(current_game.difficulty > 6) {
+    ball_jump = 10;
+  }
+
   for (var i = 0; i < 30; i++) {
     if(pos_y+padding < pos_y_max) {
       position.push([pos_x+padding, pos_y+padding]);
       position.push([pos_x_max-padding, pos_y+padding]);
-      pos_y += ball_radius+10;
+      pos_y += ball_radius+ball_jump;
     }
   }
-  for (var i = 0; i < 2; i++) {
+
+  for (var i = 0; i < 1; i++) {
     position.push([0+padding, 0+padding]);
     position.push([pos_x_max-padding, 0+padding]);
     position.push([0+padding, pos_y_max-padding]);
@@ -1161,7 +1198,7 @@ hiddencloud.Modules.startRapidSerialVisualPresentation = function(gameObj, curre
 
   var ball_radius = 20;
   var ball = new lime.Circle().setSize(ball_radius, ball_radius)
-      .setFill('#8c0000').setPosition(gameObj.width/2, (gameObj.height/2)-(ball_radius/1)); // #9C9C9C
+      .setFill('#9C9C9C').setPosition(gameObj.width/2, (gameObj.height/2)-(ball_radius/1)); // #9C9C9C
 
   layer_rsvp.appendChild(bg_rsvp);
   layer_rsvp.appendChild(ball);
