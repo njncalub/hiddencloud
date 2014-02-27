@@ -374,7 +374,7 @@ hiddencloud.Modules.ChooseGenre = function(gameObj, current_game) {
       }
       if(current_game.choices[9] == 1) {
         layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
-          .setFill("#3f3f3f").setPosition((c_size+c_padding)*13,0));
+          .setFill("#138113").setPosition((c_size+c_padding)*13,0));
       }
     case 9:
       if(current_game.difficulty == 9) {
@@ -382,7 +382,7 @@ hiddencloud.Modules.ChooseGenre = function(gameObj, current_game) {
       }
       if(current_game.choices[8] == 1) {
         layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
-          .setFill("#8c0000").setPosition((c_size+c_padding)*11,0));
+          .setFill("#138113").setPosition((c_size+c_padding)*11,0));
       }
     case 8:
       if(current_game.difficulty == 8) {
@@ -390,7 +390,7 @@ hiddencloud.Modules.ChooseGenre = function(gameObj, current_game) {
       }
       if(current_game.choices[7] == 1) {
         layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
-          .setFill("#8c0000").setPosition((c_size+c_padding)*10,0));
+          .setFill("#138113").setPosition((c_size+c_padding)*10,0));
       }
     case 7:
       if(current_game.difficulty == 7) {
@@ -398,7 +398,7 @@ hiddencloud.Modules.ChooseGenre = function(gameObj, current_game) {
       }
       if(current_game.choices[6] == 1) {
         layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
-          .setFill("#8c0000").setPosition((c_size+c_padding)*9,0));
+          .setFill("#138113").setPosition((c_size+c_padding)*9,0));
       }
     case 6:
       if(current_game.difficulty == 6) {
@@ -406,7 +406,7 @@ hiddencloud.Modules.ChooseGenre = function(gameObj, current_game) {
       }
       if(current_game.choices[5] == 1) {
         layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
-          .setFill("#DDDD00").setPosition((c_size+c_padding)*7,0));
+          .setFill("#138113").setPosition((c_size+c_padding)*7,0));
       }
     case 5:
       if(current_game.difficulty == 5) {
@@ -414,7 +414,7 @@ hiddencloud.Modules.ChooseGenre = function(gameObj, current_game) {
       }
       if(current_game.choices[4] == 1) {
         layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
-          .setFill("#DDDD00").setPosition((c_size+c_padding)*6,0));
+          .setFill("#138113").setPosition((c_size+c_padding)*6,0));
       }
     case 4:
       if(current_game.difficulty == 4) {
@@ -422,7 +422,7 @@ hiddencloud.Modules.ChooseGenre = function(gameObj, current_game) {
       }
       if(current_game.choices[3] == 1) {
         layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
-          .setFill("#DDDD00").setPosition((c_size+c_padding)*5,0));
+          .setFill("#138113").setPosition((c_size+c_padding)*5,0));
       }
     case 3:
       if(current_game.difficulty == 3) {
@@ -465,6 +465,12 @@ hiddencloud.Modules.ChooseGenre = function(gameObj, current_game) {
 
   hiddencloud.director.replaceScene(scene_choose_genre);
 
+  if(current_game.difficulty == 1) {
+    // console.log("current difficulty is 4!");
+    var wpm = current_game.benchmark_speed;
+    // console.log(wpm);
+    hiddencloud.Modules.startMovingBall(gameObj, current_game, wpm);
+  }
   if(current_game.difficulty == 4) {
     // console.log("current difficulty is 4!");
     var wpm = hiddencloud.Functions.getWPM(current_game, 0, 2); // 1,2,3
@@ -521,29 +527,30 @@ hiddencloud.Modules.startBenchmarkSpeed = function(gameObj, current_game) {
     // .setSize(gameObj.width, set_spr_header)
     .setPosition(gameObj.width/2, set_spr_header/2)
     .setFontWeight(600);
-  lbl_book_title.setText("Read the following text normally to find your present reading level. Don't skip.");
+  lbl_book_title.setText("INSTRUCTIONS");
 
-  var benchmark_text = "To gauge your progress, you must first find your base speed. " +
+  var benchmark_text = "" +
                        "DO NOT SKIP THIS PART. " + 
-                       "Your base speed is the speed that you can read this passage of text with full comprehension. " + 
                        "This is timed but please read this text at your normal pace. " +
-                       "To navigate, simply click and drag to scroll." +
+                       "To gauge your progress, you must first find your base speed. " +
+                       "Your base speed is the speed that you can read this passage of text with full comprehension. " + 
+                       // "To navigate, simply click and drag to scroll." +
                        "\r\n\r\n" +
                        "Most people have an average speed of 200 wpm (words per minute), which is also as fast as they can speak. " +
-                       "Speed reading is a technique used by people around the world to read text more quickly by training the person's \"inner voice\". " + 
+                       "Speed reading is a technique used by people around the world to read text quickler by training the person's \"inner voice\". " + 
                        "When you read, you usually experience subvocalization where you vocalize each word in your head. " +
-                       "This poses as a major problem in speed because it takes time to subvocalize each word and you can only read as fast as you speak." +
+                       // "This poses as a major problem in speed because it takes time to subvocalize each word and you can only read as fast as you speak." +
                        "\r\n\r\n" +
                        "However, by glancing at the words in just a few milliseconds, your head won't have time to subvocalize. " +
                        "By silencing your inner voice, you can read at a much greater speed with better reading comprehension (through constant training). " +
-                       "In the real world, you can speed read through methods like using a finger or pen to point and guide your eyes through each line of text at a speed faster than you can normally read. " +
-                       "This works because the eye is very good at tracking movement. " + 
-                       "Even if at this point full reading comprehension is lost, it's exactly this method of training that will allow you to read faster." +
-                       "\r\n\r\n" +
-                       "This game uses Meta Guiding to speed up eye movement and intake of the Visual Cortex and uses Rapid Serial Visual Presentation (RSVP) to improve peripheral vision. " +
+                       // // "In the real world, you can speed read through methods like using a finger or pen to point and guide your eyes through each line of text at a speed faster than you can normally read. " +
+                       // // "This works because the eye is very good at tracking movement. " + 
+                       // "Even if at this point full reading comprehension is lost, it's exactly this method of training that will allow you to read faster." +
+                       // "\r\n\r\n" +
+                       // "This game uses Meta Guiding to speed up eye movement and intake of the Visual Cortex and uses Rapid Serial Visual Presentation (RSVP) to improve peripheral vision. " +
                        "There are ten questions in total. " + 
-                       "Start by choosing a random genre for your passage. " + 
-                       "Try to speed read the lines as fast as you can by following the highlighted area. " + 
+                       // "Start by choosing a random genre for your passage. " + 
+                       // "Try to speed read the lines as fast as you can by following the highlighted area. " + 
                        "If it is too fast or too slow, you can adjust the speed through the (-) and (+) buttons. " +
                        "To test your comprehension, you need to answer a related question afterwards." +
                        "\r\n\r\n" +
@@ -617,6 +624,31 @@ hiddencloud.Modules.startBenchmarkSpeed = function(gameObj, current_game) {
   });
 }
 
+hiddencloud.Modules.ReadInstructions = function(gameObj, instructions) {
+  var scene_instructions = new lime.Scene();
+  var layer_instructions = new lime.Layer().setPosition(0, 0)
+    .setRenderer(gameObj.renderer).setAnchorPoint(0, 0);
+  var bg_instructions = new lime.Sprite().setSize(gameObj.width, gameObj.height)
+  .setFill('#CCCCCC').setPosition(0, 0).setAnchorPoint(0, 0);
+
+  var btn_width_ratio = gameObj.width/1.3;
+  var btn_side_width = (gameObj.width - btn_width_ratio)/2;
+  var btn_starting = gameObj.height-100;
+  var btn_height = 50;
+  var btn_padding = 10;
+
+  var btn_continue = new hiddencloud.Button()
+    .setColor('#B0171F').setSize(btn_width_ratio-(btn_padding*4), btn_height).setAnchorPoint(0,0)
+    .setPosition(gameObj.width/2, btn_starting+((btn_height + btn_padding)*1))
+    .setText("CONTINUE").setFontSize(15);
+
+  layer_instructions.appendChild(bg_instructions);
+  layer_instructions.appendChild(btn_continue);
+  scene_instructions.appendChild(layer_instructions);
+
+  hiddencloud.director.replaceScene(scene_instructions);
+}
+
 hiddencloud.Modules.ReadBookText = function(gameObj, current_game, text_question_object){
   var chosen_b_t = {};
       chosen_b_t.text = text_question_object.from_book_text.text;
@@ -655,10 +687,6 @@ hiddencloud.Modules.ReadBookText = function(gameObj, current_game, text_question
       hiddencloud.Modules.startRapidSerialVisualPresentation(gameObj, current_game, chosen_b_t, chosen_q_and_c);
   }
   else if(current_game.difficulty == 9) {
-      // console.log("entering rsvp mode");
-      hiddencloud.Modules.startRapidSerialVisualPresentation(gameObj, current_game, chosen_b_t, chosen_q_and_c);
-  }
-  else if(current_game.difficulty == 10) {
       // console.log("entering rsvp mode");
       hiddencloud.Modules.startRapidSerialVisualPresentation(gameObj, current_game, chosen_b_t, chosen_q_and_c);
   }
@@ -800,6 +828,7 @@ hiddencloud.Modules.ReadBookText = function(gameObj, current_game, text_question
       var pos = this.getPosition();
           pos.y += 16;
       this.setPosition(pos);
+      scroller.scrollTo(pos.y-50);
     }, bg_highlight_line, dt2);
 
     var speed_var = 120;
@@ -889,6 +918,9 @@ hiddencloud.Modules.ReadBookText = function(gameObj, current_game, text_question
 
       // var genre =  hiddencloud.Modules.ChooseGenre(gameObj, current_game, current_game.time, f);
     });
+    if (current_game.difficulty == 1) {
+      window.read_instructions_guide();
+    }
   }
 }
 
@@ -973,7 +1005,8 @@ hiddencloud.Modules.startMovingBall = function(gameObj, current_game, average_wp
     .setFill('#CCCCCC').setPosition(0, 0).setAnchorPoint(0, 0);
 
   var lbl_instructions = new lime.Label()
-    .setText("Don't move your head. Just follow the ball with your eyes.")
+    // .setText("Don't move your head. Just follow the ball with your eyes.")
+    .setText("")
     .setSize(gameObj.width, 50)
     .setMultiline(true)
     .setAlign("center")
@@ -990,8 +1023,8 @@ hiddencloud.Modules.startMovingBall = function(gameObj, current_game, average_wp
   var red_ball = new lime.Circle().setSize(ball_radius, ball_radius)
       .setFill('#B0171F').setPosition(gameObj.width/2, gameObj.height/2);
 
-  position.push([gameObj.width/2, gameObj.height/2]);
-  position.push([gameObj.width/2, gameObj.height/2]);
+  // position.push([gameObj.width/2, gameObj.height/2]);
+  // position.push([gameObj.width/2, gameObj.height/2]);
   position.push([gameObj.width/2, gameObj.height/2]);
 
   for (var i = 0; i < 2; i++) {
@@ -1034,16 +1067,20 @@ hiddencloud.Modules.startMovingBall = function(gameObj, current_game, average_wp
   // var dt = 500;
   var dt = hiddencloud.Functions.getMovingBallDT(average_wpm); // range = 600 - 350
 
+  if (current_game.difficulty > 0) {
+    red_ball.setFill('#8c0000'); // #FFF154
+    dt = 800;
+  }
   if (current_game.difficulty > 2) {
-    red_ball.setFill('#8c0000');
-    dt = 750;
+    red_ball.setFill('#8c0000'); // #8c0000
+    dt = 650;
   }
   if (current_game.difficulty > 5) {
-    red_ball.setFill('#985F5F');
+    red_ball.setFill('#8c0000'); // #985F5F
     dt = 500;
   }
   if (current_game.difficulty > 8) {
-    red_ball.setFill('#9C9C9C');
+    red_ball.setFill('#8c0000'); // #9C9C9C
     dt = 350;
   }
 
@@ -1068,6 +1105,10 @@ hiddencloud.Modules.startMovingBall = function(gameObj, current_game, average_wp
   scene_moving_ball.appendChild(layer_moving_ball);
 
   hiddencloud.director.pushScene(scene_moving_ball);
+
+  if (current_game.difficulty == 1) {
+    window.read_instructions_ball();
+  }
 
   // goog.events.listen(exitMoveBallButton, ['mousedown', 'touchstart'], function(e) {
   //   console.log("pressed back button");
@@ -1120,7 +1161,7 @@ hiddencloud.Modules.startRapidSerialVisualPresentation = function(gameObj, curre
 
   var ball_radius = 20;
   var ball = new lime.Circle().setSize(ball_radius, ball_radius)
-      .setFill('#9C9C9C').setPosition(gameObj.width/2, (gameObj.height/2)-(ball_radius/1));
+      .setFill('#8c0000').setPosition(gameObj.width/2, (gameObj.height/2)-(ball_radius/1)); // #9C9C9C
 
   layer_rsvp.appendChild(bg_rsvp);
   layer_rsvp.appendChild(ball);
@@ -1167,6 +1208,10 @@ hiddencloud.Modules.startRapidSerialVisualPresentation = function(gameObj, curre
       lime.scheduleManager.scheduleWithDelay(displayTextFunction, lbl_big_text, dt);
     }
   });
+
+  if (current_game.difficulty == 3) {
+    window.read_instructions_rsvp();
+  }
 }
 
 hiddencloud.Modules.endOfQuiz = function(gameObj, current_game) {
@@ -1382,7 +1427,7 @@ hiddencloud.Modules.endOfQuiz = function(gameObj, current_game) {
       }
       if(current_game.choices[9] == 1) {
         layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
-          .setFill("#3f3f3f").setPosition((c_size+c_padding)*13,0));
+          .setFill("#138113").setPosition((c_size+c_padding)*13,0));
       }
     case 9:
       if(current_game.difficulty == 9) {
@@ -1390,7 +1435,7 @@ hiddencloud.Modules.endOfQuiz = function(gameObj, current_game) {
       }
       if(current_game.choices[8] == 1) {
         layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
-          .setFill("#8c0000").setPosition((c_size+c_padding)*11,0));
+          .setFill("#138113").setPosition((c_size+c_padding)*11,0));
       }
     case 8:
       if(current_game.difficulty == 8) {
@@ -1398,7 +1443,7 @@ hiddencloud.Modules.endOfQuiz = function(gameObj, current_game) {
       }
       if(current_game.choices[7] == 1) {
         layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
-          .setFill("#8c0000").setPosition((c_size+c_padding)*10,0));
+          .setFill("#138113").setPosition((c_size+c_padding)*10,0));
       }
     case 7:
       if(current_game.difficulty == 7) {
@@ -1406,7 +1451,7 @@ hiddencloud.Modules.endOfQuiz = function(gameObj, current_game) {
       }
       if(current_game.choices[6] == 1) {
         layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
-          .setFill("#8c0000").setPosition((c_size+c_padding)*9,0));
+          .setFill("#138113").setPosition((c_size+c_padding)*9,0));
       }
     case 6:
       if(current_game.difficulty == 6) {
@@ -1414,7 +1459,7 @@ hiddencloud.Modules.endOfQuiz = function(gameObj, current_game) {
       }
       if(current_game.choices[5] == 1) {
         layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
-          .setFill("#DDDD00").setPosition((c_size+c_padding)*7,0));
+          .setFill("#138113").setPosition((c_size+c_padding)*7,0));
       }
     case 5:
       if(current_game.difficulty == 5) {
@@ -1422,7 +1467,7 @@ hiddencloud.Modules.endOfQuiz = function(gameObj, current_game) {
       }
       if(current_game.choices[4] == 1) {
         layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
-          .setFill("#DDDD00").setPosition((c_size+c_padding)*6,0));
+          .setFill("#138113").setPosition((c_size+c_padding)*6,0));
       }
     case 4:
       if(current_game.difficulty == 4) {
@@ -1430,7 +1475,7 @@ hiddencloud.Modules.endOfQuiz = function(gameObj, current_game) {
       }
       if(current_game.choices[3] == 1) {
         layer_difficulty.appendChild(new lime.Circle().setSize(c_size,c_size).setAnchorPoint(0,0)
-          .setFill("#DDDD00").setPosition((c_size+c_padding)*5,0));
+          .setFill("#138113").setPosition((c_size+c_padding)*5,0));
       }
     case 3:
       if(current_game.difficulty == 3) {

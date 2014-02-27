@@ -389,6 +389,56 @@
     resultsContainer.appendChild(resultsList);
   }
 
+  $('#instruction1Modal').on('hidden.bs.modal', function () {
+    hiddencloud.resume();
+  });
+  $('#instruction2Modal').on('hidden.bs.modal', function () {
+    hiddencloud.resume();
+  });
+  $('#instruction3Modal').on('hidden.bs.modal', function () {
+    hiddencloud.resume();
+  });
+
+  window.okay_instructions1 = function() {
+    $('#instruction1Modal').modal('hide');
+    hiddencloud.resume();
+  }
+  window.okay_instructions2 = function() {
+    $('#instruction2Modal').modal('hide');
+    hiddencloud.resume();
+  }
+  window.okay_instructions3 = function() {
+    $('#instruction3Modal').modal('hide');
+    hiddencloud.resume();
+  }
+
+  window.read_instructions_ball = function() {
+    console.log("read_instructions_ball() called.");
+    
+    hiddencloud.pause();
+    
+    $('#instruction1Modal').modal({
+      keyboard: false,
+    });
+  }
+  window.read_instructions_guide = function() {
+    console.log("read_instructions_guide() called.");
+    
+    hiddencloud.pause();
+    
+    $('#instruction2Modal').modal({
+      keyboard: false,
+    });
+  }
+  window.read_instructions_rsvp = function() {
+    console.log("read_instructions_rsvp() called.");
+    
+    hiddencloud.pause();
+    
+    $('#instruction3Modal').modal({
+      keyboard: false,
+    });
+  }
 
   window.answer_survey = function(benchmark_speed, awpm, rc) {
     console.log("answer_survey() called.");

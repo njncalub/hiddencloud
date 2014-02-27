@@ -72,4 +72,15 @@ hiddencloud.start = function() {
   hiddencloud.Modules.startGame(gameObj);
 }
 
+
+hiddencloud.pause = function() {
+  hiddencloud.director.setPaused(true);
+}
+
+hiddencloud.resume = function(){
+  hiddencloud.director.setPaused(false);
+}
+
 goog.exportSymbol('hiddencloud.start', hiddencloud.start);
+goog.exportSymbol('hiddencloud.pause', hiddencloud.pause);
+goog.exportSymbol('hiddencloud.resume', hiddencloud.resume);
